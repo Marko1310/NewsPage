@@ -9,9 +9,16 @@
 .title {
   font-size: 32px;
   font-weight: $InterV_ExtraBold;
-  color: #bb1e1e;
+  color: #1d1d1b;
   width: 139px;
   margin-right: 43px;
+  & span {
+    color: #bb1e1e;
+  }
+}
+
+.title::first-letter + ::first-letter {
+  color: blue;
 }
 
 .search-form {
@@ -24,6 +31,7 @@
   border-width: 0;
   width: 725px;
   height: 50px;
+  padding-left: 15.5px;
 }
 
 .search-input {
@@ -32,6 +40,18 @@
   background: $white;
   border-radius: 10px;
   padding: 5px;
+  padding-left: 34.5px;
+  background-image: url("../assets/Search.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  color: #1d1d1b;
+  font-size: 15px;
+  font-weight: $InterV;
+}
+
+.search-input::placeholder {
+  font-size: 15px;
+  font-weight: $InterV;
 }
 
 .search-input:focus {
@@ -50,4 +70,5 @@
   margin-right: 5px;
   text-transform: uppercase;
   padding: 10px 16px;
+  cursor: pointer;
 }
