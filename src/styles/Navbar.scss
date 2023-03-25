@@ -1,0 +1,15 @@
+.navbar-container {
+  position: absolute;
+  width: 1440px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  background-image: url("../components/Navbar/navbarBackground.png");
+  background-size: cover;
+}
+
+.navbar-text-container {
+  max-width: 1095px;
+  display: flex;
+  justify-content: center;
+}
