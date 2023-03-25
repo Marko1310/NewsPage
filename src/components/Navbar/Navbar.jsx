@@ -1,5 +1,4 @@
 import "../../styles/Navbar.css";
-// import background from "./navbarBackground.png";
 
 const Navbar = () => {
   return (

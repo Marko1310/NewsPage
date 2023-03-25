@@ -5,7 +5,7 @@
   left: 0px;
   top: 0px;
   background-image: url("../components/Navbar/navbarBackground.png");
-  background-size: cover;
+  background-size: auto;
   display: flex;
   justify-content: center;
 }
@@ -21,7 +21,7 @@
 
 .navbar-text-left {
   width: 237px;
-  font-weight: 700;
+  font-weight: 600;
   height: 21px;
   font-size: 16px;
   letter-spacing: -0.136px;
@@ -54,7 +54,7 @@
   line-height: 20px;
   margin-left: 24px;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -65,7 +65,7 @@
   border-radius: 8px;
   border-width: 0;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   color: #1d1d1b;
   cursor: pointer;
 }/*# sourceMappingURL=Navbar.css.map */
