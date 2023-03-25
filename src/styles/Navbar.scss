@@ -1,4 +1,6 @@
-@import "../variables/Variables.css" .navbar-container {
+@import "../variables/Variables.scss";
+
+.navbar-container {
   position: absolute;
   width: 100%;
   height: 60px;
@@ -27,6 +29,13 @@
   letter-spacing: -0.136px;
   color: $white;
   margin-left: 0;
+  cursor: pointer;
+}
+
+.navbar-text-left {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .navbar-text-center {
@@ -52,6 +61,8 @@
   font-size: 14px;
   line-height: 20px;
   margin-left: 24px;
+  color: $white;
+  font-weight: $InterV_Bold;
 }
 
 .navbar-button {
@@ -63,4 +74,8 @@
   text-transform: uppercase;
   font-weight: $InterV_Bold;
   color: #1d1d1b;
+}
+
+.navbar-button:hover {
+  cursor: pointer;
 }
