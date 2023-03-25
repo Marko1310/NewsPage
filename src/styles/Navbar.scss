@@ -32,12 +32,6 @@
   cursor: pointer;
 }
 
-.navbar-text-left {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .navbar-text-center {
   width: 330px;
   height: 21px;
@@ -63,6 +57,7 @@
   margin-left: 24px;
   color: $white;
   font-weight: $InterV_Bold;
+  cursor: pointer;
 }
 
 .navbar-button {
@@ -74,8 +69,5 @@
   text-transform: uppercase;
   font-weight: $InterV_Bold;
   color: #1d1d1b;
-}
-
-.navbar-button:hover {
   cursor: pointer;
 }

@@ -30,10 +30,6 @@
   cursor: pointer;
 }
 
-.navbar-text-left:hover {
-  cursor: pointer;
-}
-
 .navbar-text-center {
   width: 330px;
   height: 21px;
@@ -59,6 +55,7 @@
   margin-left: 24px;
   color: #ffffff;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .navbar-button {
@@ -70,8 +67,5 @@
   text-transform: uppercase;
   font-weight: 700;
   color: #1d1d1b;
-}
-
-.navbar-button:hover {
   cursor: pointer;
 }/*# sourceMappingURL=Navbar.css.map */
