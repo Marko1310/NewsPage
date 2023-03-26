@@ -1,36 +1,36 @@
 export default [
   {
-    imgUrl: "../../../public/assets/Home.png",
+    imgUrl: "../../../public/assets/icons/Home.png",
     title: "Home",
     id: 1,
   },
   {
-    imgUrl: "../../../public/assets/General.png",
+    imgUrl: "../../../public/assets/icons/General.png",
     title: "General",
     id: 2,
   },
   {
-    imgUrl: "../../../public/assets/Business.png",
+    imgUrl: "../../../public/assets/icons/Business.png",
     title: "Business",
     id: 3,
   },
   {
-    imgUrl: "../../../public/assets/Health.png",
+    imgUrl: "../../../public/assets/icons/Health.png",
     title: "Health",
     id: 4,
   },
   {
-    imgUrl: "../../../public/assets/Science.png",
+    imgUrl: "../../../public/assets/icons/Science.png",
     title: "Science",
     id: 5,
   },
   {
-    imgUrl: "../../../public/assets/Sports.png",
+    imgUrl: "../../../public/assets/icons/Sports.png",
     title: "Sports",
     id: 6,
   },
   {
-    imgUrl: "../../../public/assets/Technology.png",
+    imgUrl: "../../../public/assets/icons/Technology.png",
     title: "Technology",
     id: 7,
   },
