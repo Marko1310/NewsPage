@@ -7,7 +7,6 @@
 
 .main-container {
   width: min(100%, 1095px);
-  margin: 95px 0;
   margin-left: 5px;
   height: 100vh;
   border-style: solid;

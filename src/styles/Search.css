@@ -1,10 +1,10 @@
 .titleSearch-container {
   display: flex;
   align-items: center;
-  border-style: solid;
-  border-color: 0;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.1);
   width: 100%;
   justify-content: space-between;
+  margin-top: 60px;
 }
 
 .title {
@@ -13,6 +13,8 @@
   color: #1d1d1b;
   width: 139px;
   margin-right: 43px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .title span {
   color: #bb1e1e;
@@ -23,6 +25,8 @@
   justify-content: center;
   width: min(100%, 725px);
   margin-right: auto;
+  margin-top: 35px;
+  margin-bottom: 28px;
 }
 
 .search-form {
@@ -55,11 +59,13 @@
 .search-input::-moz-placeholder {
   font-size: 15px;
   font-weight: 300;
+  color: rgba(29, 29, 27, 0.4);
 }
 
 .search-input::placeholder {
   font-size: 15px;
   font-weight: 300;
+  color: rgba(29, 29, 27, 0.4);
 }
 
 .search-input:focus {
