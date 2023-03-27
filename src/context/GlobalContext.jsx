@@ -75,20 +75,30 @@ export const GlobalProvider = ({ children }) => {
     setNumArticles(numArticles + 18);
   };
 
-  //   useEffect(() => {
-  //     getHomePageArticles().then((articles) => {
-  //       const sortedArticles = [...articles].sort((a, b) => {
-  //         const dateA = new Date(a.publishedAt);
-  //         const dateB = new Date(b.publishedAt);
-  //         return dateB - dateA;
-  //       });
-  //       setArticles(sortedArticles);
-  //     });
-  //   }, []);
+  useEffect(() => {
+    if (selectedCategory === "Home") {
+      getHomePageArticles().then((articles) => {
+        const sortedArticles = [...articles].sort((a, b) => {
+          const dateA = new Date(a.publishedAt);
+          const dateB = new Date(b.publishedAt);
+          return dateB - dateA;
+        });
+        setArticles(sortedArticles);
+      });
+    }
+  }, [selectedCategory]);
 
-  // change sidebar category
+  // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
+    getArticlesByCategory(category).then((articles) => {
+      const sortedArticles = [...articles].sort((a, b) => {
+        const dateA = new Date(a.publishedAt);
+        const dateB = new Date(b.publishedAt);
+        return dateB - dateA;
+      });
+      setArticles(sortedArticles);
+    });
   };
 
   const globalState = {
