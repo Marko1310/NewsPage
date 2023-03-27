@@ -34,4 +34,9 @@ export default [
     title: "Technology",
     id: 7,
   },
+  {
+    imgUrl: "../../../public/assets/icons/Technology.png",
+    title: "Favorites",
+    id: 7,
+  },
 ];
