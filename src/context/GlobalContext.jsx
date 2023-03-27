@@ -7,12 +7,13 @@ export const GlobalContext = createContext();
 // provider component
 export const GlobalProvider = ({ children }) => {
   // API key
-  const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
+  //   const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
+  const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
   // states //
   const [articles, setArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
-  const [numArticles, setNumArticles] = useState(16);
+  const [numArticles, setNumArticles] = useState(18);
 
   // functions //
   // function to fetch by categorie:
@@ -71,14 +72,19 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const handleLoadMore = function () {
-    setNumArticles(numArticles + 16);
+    setNumArticles(numArticles + 18);
   };
 
-  useEffect(() => {
-    getHomePageArticles().then((articles) => {
-      setArticles(articles);
-    });
-  }, []);
+  //   useEffect(() => {
+  //     getHomePageArticles().then((articles) => {
+  //       const sortedArticles = [...articles].sort((a, b) => {
+  //         const dateA = new Date(a.publishedAt);
+  //         const dateB = new Date(b.publishedAt);
+  //         return dateB - dateA;
+  //       });
+  //       setArticles(sortedArticles);
+  //     });
+  //   }, []);
 
   // change sidebar category
   const handleChangeCategory = function (category) {
