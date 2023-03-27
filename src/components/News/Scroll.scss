@@ -8,6 +8,15 @@
   top: 45px;
 }
 
-// .scroll-container::-webkit-scrollbar {
-//   display: none;
-// }
+.scroll-container::-webkit-scrollbar {
+  background-color: rgb(255, 255, 255);
+  width: 4px;
+  height: 100px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.237981);
+  width: 4px;
+  height: 50px;
+  border-radius: 2px;
+}
