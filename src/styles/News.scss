@@ -1,13 +1,41 @@
 @import "../variables/Variables.scss";
 
 .news-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  //   display: grid;
-  //   grid-template-columns: repeat(auto-fill, minmax(200px, 322px));
-  //   grid-template-rows: 1fr;
+  margin-left: 25px;
+  margin-right: 0px;
+}
 
+.news-title {
+  margin-top: 0;
+  font-weight: $InterV_Semi;
+  font-size: 18px;
+  letter-spacing: -0.153px;
+  color: #1d1d1b;
+}
+
+.news-gridLayout {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr) 1fr 1fr;
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 22px;
+  //   justify-items: end;
+  justify-content: end;
+  //   justify-self: end;
+  justify-content: stretch;
+}
+
+.article-box {
+  border-style: solid;
+  border-color: red;
+}
+
+.latestNews {
+  grid-column-start: -1;
+  grid-column-end: -2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border-style: solid;
 }
