@@ -9,11 +9,13 @@ const News = () => {
         {articles.map((article) => {
           return (
             <div className="article-box">
-              <img src={article.imgUrl} />
-              <div className="description-container">
-                <p className="description-group">{article.group}</p>
-                <p className="description-title">{article.title}</p>
-                <p className="description-author">{article.author}</p>
+              <div className="article-image-container">
+                <img className="article-image" src={article.imgUrl} />
+              </div>
+              <div className="article-container">
+                <p className="article-category">{article.category}</p>
+                <p className="article-title">{article.title}</p>
+                <p className="article-author">{article.author}</p>
               </div>
             </div>
           );
