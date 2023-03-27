@@ -1,5 +1,6 @@
 import "../../styles/News.css";
 import articles from "./articles";
+import LatestNews from "./LatestNews.jsx";
 
 const News = () => {
   return (
@@ -20,7 +21,9 @@ const News = () => {
             </div>
           );
         })}
-        <div className="latestNews"></div>
+        {/* <div className="latestNews"> */}
+        <LatestNews />
+        {/* </div> */}
       </div>
     </div>
   );

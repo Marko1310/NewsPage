@@ -82,5 +82,9 @@
   margin-right: 5px;
   text-transform: uppercase;
   padding: 10px 16px;
-  cursor: pointer;
+  transition: color 0.8s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+  }
 }

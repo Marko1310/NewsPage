@@ -84,5 +84,9 @@
   margin-right: 5px;
   text-transform: uppercase;
   padding: 10px 16px;
+  transition: color 0.8s ease-in-out;
+}
+.search-button:hover {
   cursor: pointer;
+  filter: brightness(1.2);
 }/*# sourceMappingURL=Search.css.map */
