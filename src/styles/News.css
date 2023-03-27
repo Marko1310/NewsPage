@@ -31,6 +31,8 @@
 
 .article-image-container {
   height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .article-image {
@@ -38,6 +40,11 @@
   max-height: 100%;
   border-radius: 8px;
   margin-bottom: 30px;
+  transition: transform 0.2s ease-in-out;
+}
+.article-image:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .article-container {
@@ -59,6 +66,9 @@
   letter-spacing: -0.0153846px;
   text-transform: uppercase;
   color: #1e71bb;
+}
+.article-category:hover {
+  cursor: pointer;
 }
 
 .article-title {
@@ -83,6 +93,9 @@
   letter-spacing: -0.0675px;
   color: #1d1d1b;
 }
+.article-author:hover {
+  cursor: pointer;
+}
 
 .latestNews {
   grid-column-start: -1;
@@ -90,4 +103,7 @@
   grid-row-start: 1;
   grid-row-end: 3;
   border-style: solid;
+}
+.latestNews:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=News.css.map */
