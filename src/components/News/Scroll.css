@@ -1,8 +1,9 @@
 .scroll-container {
-  border-style: solid;
   overflow-y: scroll;
-  /* border-style: solid;
-    border-color: black; */
   margin-top: 0;
   background-color: white;
+  position: absolute;
+  width: 100%;
+  max-height: calc(100% - 97px);
+  top: 45px;
 }/*# sourceMappingURL=Scroll.css.map */

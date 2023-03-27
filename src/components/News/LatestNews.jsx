@@ -14,21 +14,15 @@ const LatestNews = () => {
         <div className="scroll-container">
           <Scroll>
             {latestNews.map((el) => {
-              return (
-                //   <div className="latest-news-box">
-                //     <p>{el.time}</p>
-                //     <p>{el.title}</p>
-                //   </div>
-                <EachLatestNews el={el} />
-              );
+              return <EachLatestNews el={el} />;
             })}
           </Scroll>
         </div>
       </div>
 
-      {/* <div className="latest-footer-container"> */}
-      <p className="latest-footer-title">{`See all news >`}</p>
-      {/* </div> */}
+      <div className="latest-footer-container">
+        <p className="latest-footer-title">{`See all news >`}</p>
+      </div>
     </div>
   );
 };
