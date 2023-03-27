@@ -1,17 +1,26 @@
 import "../../styles/News.css";
-import articles from "./articles";
+// import articles from "./articles";
 import LatestNews from "./LatestNews.jsx";
 
+import { useContext } from "react";
+
+import { GlobalContext } from "../../context/GlobalContext";
+
 const News = () => {
+  const { articles, numArticles, handleLoadMore } = useContext(GlobalContext);
+  const articleSubset = articles.slice(0, numArticles);
+
+  console.log(articles.length, numArticles);
+
   return (
     <div className="news-container">
       <p className="news-title">News</p>
       <div className="news-gridLayout">
-        {articles.map((article) => {
+        {articleSubset.map((article) => {
           return (
             <div className="article-box">
               <div className="article-image-container">
-                <img className="article-image" src={article.imgUrl} />
+                <img className="article-image" src={article.urlToImage} />
               </div>
               <div className="article-container">
                 <p className="article-category">{article.category}</p>
@@ -21,10 +30,13 @@ const News = () => {
             </div>
           );
         })}
-        {/* <div className="latestNews"> */}
         <LatestNews />
-        {/* </div> */}
       </div>
+      {numArticles < articles.length && (
+        <p onClick={() => handleLoadMore()} className="loadMore">
+          Load more...
+        </p>
+      )}
     </div>
   );
 };

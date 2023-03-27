@@ -12,25 +12,47 @@ export const GlobalProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
+  const [numArticles, setNumArticles] = useState(16);
 
   // functions //
-  //   const getAllArticles = function (categorie) {
-  //     const allArticles = [];
-  //     axios
-  //       .get(
-  //         `https://newsapi.org/v2/top-headlines?country=us&category=${categorie}&apiKey=${API_KEY}`
-  //       )
-  //       .then((res) => {
-  //         const articles = res.data.articles;
-  //         articles.map((el) => {
-  //           const newArticle = { ...el, category: categorie };
-  //           allArticles.push(newArticle);
-  //         });
-  //         setArticles((current) => [...current, ...allArticles]);
-  //         console.log(allArticles);
-  //       });
-  //   };
+  // function to fetch by categorie:
+  async function getArticlesByCategory(category) {
+    const articles = [];
+    const response = await axios.get(
+      `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+    );
+    response.data.articles.map((el) => {
+      const newArticle = { ...el, category: category };
 
+      articles.push(newArticle);
+    });
+    return articles;
+  }
+
+  // function to fetch all articles:
+  // 1. fetch articles for each category
+  // 2. add a category key
+  // 3. push each set of array into global array
+  // 4. update state with global array
+  async function getHomePageArticles() {
+    const categories = [
+      "business",
+      "entertainment",
+      "general",
+      "health",
+      "science",
+      "sports",
+      "technology",
+    ];
+    const allArticles = [];
+    for (const category of categories) {
+      const articles = await getArticlesByCategory(category);
+      allArticles.push(...articles);
+    }
+    return allArticles;
+  }
+
+  // function to fetch articles depending on the categorie
   const getArticlesByCategorie = function (categorie) {
     const allArticles = [];
     axios
@@ -48,20 +70,14 @@ export const GlobalProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    // axios
-    //   .get(
-    //     `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${API_KEY}`
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data).catch((err) => console.log(err));
-    //     //     res.json();
-    //     //   })
-    //     //   .then((data) => {
-    //     //     console.log(data);
-    //   });
+  const handleLoadMore = function () {
+    setNumArticles(numArticles + 16);
+  };
 
-    getArticlesByCategorie("business");
+  useEffect(() => {
+    getHomePageArticles().then((articles) => {
+      setArticles(articles);
+    });
   }, []);
 
   // change sidebar category
@@ -77,6 +93,8 @@ export const GlobalProvider = ({ children }) => {
     loading,
     setLoading,
     handleChangeCategory,
+    numArticles,
+    handleLoadMore,
   };
 
   return (
