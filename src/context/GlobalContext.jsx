@@ -13,9 +13,11 @@ export const GlobalProvider = ({ children }) => {
   const API_KEY = "03a53c477965493ab56337906674304e";
   // states //
   const [articles, setArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
-  const [numArticles, setNumArticles] = useState(18);
+  const [numArticles, setNumArticles] = useState(19);
+  const [input, setInput] = useState("");
 
   // functions //
   // function to fetch by categorie:
@@ -123,6 +125,18 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const handleSearchSumbit = function (e, input) {
+    e.preventDefault();
+    if (input !== "") {
+      const filteredArticles = articles.filter((article) =>
+        article.title.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredArticles(filteredArticles);
+    } else {
+      setFilteredArticles("");
+    }
+  };
+
   const globalState = {
     articles,
     setArticles,
@@ -134,6 +148,10 @@ export const GlobalProvider = ({ children }) => {
     numArticles,
     handleLoadMore,
     handleFavorite,
+    handleSearchSumbit,
+    input,
+    setInput,
+    filteredArticles,
   };
 
   return (

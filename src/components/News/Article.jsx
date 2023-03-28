@@ -11,7 +11,6 @@ const Article = ({ article }) => {
     const isStoredArticle = storedArticles.find(
       (storedArticle) => storedArticle.url === article.url
     );
-    console.log(isStoredArticle);
     if (isStoredArticle) setIsFavorite(true);
     else if (isStoredArticle === undefined) setIsFavorite(false);
   }, [article]);

@@ -8,8 +8,12 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const News = () => {
-  const { articles, numArticles, handleLoadMore } = useContext(GlobalContext);
-  const articleSubset = articles.slice(0, numArticles);
+  const { articles, filteredArticles, numArticles, handleLoadMore } =
+    useContext(GlobalContext);
+  const articleSubset =
+    filteredArticles.length > 0
+      ? filteredArticles
+      : articles.slice(0, numArticles);
 
   return (
     <div className="news-container">
@@ -21,7 +25,7 @@ const News = () => {
         })}
         <LatestNews />
       </div>
-      {numArticles < articles.length && (
+      {numArticles < articles.length && filteredArticles.length === 0 && (
         <p onClick={() => handleLoadMore()} className="loadMore">
           Load more...
         </p>

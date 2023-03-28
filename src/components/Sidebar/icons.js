@@ -35,8 +35,8 @@ export default [
     id: 7,
   },
   {
-    imgUrl: "../../../public/assets/icons/Technology.png",
+    imgUrl: "../../../public/assets/icons/Favorites.svg",
     title: "Favorites",
-    id: 7,
+    id: 8,
   },
 ];
