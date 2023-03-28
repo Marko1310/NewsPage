@@ -20,6 +20,20 @@ export const GlobalProvider = ({ children }) => {
   const [input, setInput] = useState("");
 
   // functions //
+
+  useEffect(() => {
+    if (selectedCategory === "Home") {
+      getHomePageArticles().then((articles) => {
+        const sortedArticles = [...articles].sort((a, b) => {
+          const dateA = new Date(a.publishedAt);
+          const dateB = new Date(b.publishedAt);
+          return dateB - dateA;
+        });
+        setArticles(sortedArticles);
+      });
+    }
+  }, []);
+
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
     const articles = [];
@@ -61,19 +75,6 @@ export const GlobalProvider = ({ children }) => {
   const handleLoadMore = function () {
     setNumArticles(numArticles + 18);
   };
-
-  useEffect(() => {
-    if (selectedCategory === "Home") {
-      getHomePageArticles().then((articles) => {
-        const sortedArticles = [...articles].sort((a, b) => {
-          const dateA = new Date(a.publishedAt);
-          const dateB = new Date(b.publishedAt);
-          return dateB - dateA;
-        });
-        setArticles(sortedArticles);
-      });
-    }
-  }, []);
 
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {

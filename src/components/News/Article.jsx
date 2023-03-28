@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import "../../styles/Article.css";
+import NoImage from "../../../public/assets/images/No_Image.png";
 
 const Article = ({ article }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -18,7 +19,10 @@ const Article = ({ article }) => {
   return (
     <div id={article.id} className="article-box">
       <div className="article-image-container">
-        <img className="article-image" src={article.urlToImage} />
+        <img
+          className="article-image"
+          src={!article.urlToImage ? NoImage : article.urlToImage}
+        />
       </div>
       <div className="article-container">
         <p className="article-category">{article.category}</p>
