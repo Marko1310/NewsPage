@@ -1,5 +1,5 @@
 import "../../styles/News.css";
-import articles from "./articles";
+// import articles from "./articles";
 import LatestNews from "./LatestNews.jsx";
 import Article from "./Article.jsx";
 
@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const News = () => {
-  const { numArticles, handleLoadMore } = useContext(GlobalContext);
+  const { articles, numArticles, handleLoadMore } = useContext(GlobalContext);
   const articleSubset = articles.slice(0, numArticles);
 
   return (
@@ -16,7 +16,7 @@ const News = () => {
       <p className="news-title">News</p>
 
       <div className="news-gridLayout">
-        {articles.map((article) => {
+        {articleSubset.map((article) => {
           return <Article article={article} />;
         })}
         <LatestNews />

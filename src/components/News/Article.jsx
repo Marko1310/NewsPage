@@ -9,14 +9,15 @@ const Article = ({ article }) => {
   useEffect(() => {
     const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
     const isStoredArticle = storedArticles.find(
-      (storedArticle) => storedArticle.id === article.id
+      (storedArticle) => storedArticle.url === article.url
     );
+    console.log(isStoredArticle);
     if (isStoredArticle) setIsFavorite(true);
-    else setIsFavorite(false);
-  }, [isFavorite]);
+    else if (isStoredArticle === undefined) setIsFavorite(false);
+  }, [article]);
 
   return (
-    <div id={article.url} className="article-box">
+    <div id={article.id} className="article-box">
       <div className="article-image-container">
         <img className="article-image" src={article.urlToImage} />
       </div>

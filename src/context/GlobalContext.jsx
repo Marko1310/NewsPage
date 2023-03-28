@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 // create Context
 export const GlobalContext = createContext();
@@ -8,7 +9,8 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   // API key
   //   const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
-  const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
+  //   const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
+  const API_KEY = "03a53c477965493ab56337906674304e";
   // states //
   const [articles, setArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
@@ -23,7 +25,8 @@ export const GlobalProvider = ({ children }) => {
       `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
     );
     response.data.articles.map((el) => {
-      const newArticle = { ...el, category: category };
+      const id = uuidv4();
+      const newArticle = { ...el, id: id, category: category };
 
       articles.push(newArticle);
     });
@@ -53,52 +56,48 @@ export const GlobalProvider = ({ children }) => {
     return allArticles;
   }
 
-  // function to fetch articles depending on the categorie
-  const getArticlesByCategorie = function (categorie) {
-    const allArticles = [];
-    axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${categorie}&apiKey=${API_KEY}`
-      )
-      .then((res) => {
-        const articles = res.data.articles;
-        articles.map((el) => {
-          const newArticle = { ...el, category: categorie };
-          allArticles.push(newArticle);
-        });
-        setArticles(allArticles);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const handleLoadMore = function () {
     setNumArticles(numArticles + 18);
   };
 
-  //   useEffect(() => {
-  //     if (selectedCategory === "Home") {
-  //       getHomePageArticles().then((articles) => {
-  //         const sortedArticles = [...articles].sort((a, b) => {
-  //           const dateA = new Date(a.publishedAt);
-  //           const dateB = new Date(b.publishedAt);
-  //           return dateB - dateA;
-  //         });
-  //         setArticles(sortedArticles);
-  //       });
-  //     }
-  //   }, [selectedCategory]);
+  useEffect(() => {
+    if (selectedCategory === "Home") {
+      getHomePageArticles().then((articles) => {
+        const sortedArticles = [...articles].sort((a, b) => {
+          const dateA = new Date(a.publishedAt);
+          const dateB = new Date(b.publishedAt);
+          return dateB - dateA;
+        });
+        setArticles(sortedArticles);
+      });
+    }
+  }, []);
 
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
-    getArticlesByCategory(category).then((articles) => {
-      const sortedArticles = [...articles].sort((a, b) => {
-        const dateA = new Date(a.publishedAt);
-        const dateB = new Date(b.publishedAt);
-        return dateB - dateA;
+    if (category === "Favorites") {
+      const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+      setArticles(storedArticles);
+    } else if (category === "Home") {
+      getHomePageArticles().then((articles) => {
+        const sortedArticles = [...articles].sort((a, b) => {
+          const dateA = new Date(a.publishedAt);
+          const dateB = new Date(b.publishedAt);
+          return dateB - dateA;
+        });
+        setArticles(sortedArticles);
       });
-      setArticles(sortedArticles);
-    });
+    } else {
+      getArticlesByCategory(category).then((articles) => {
+        const sortedArticles = [...articles].sort((a, b) => {
+          const dateA = new Date(a.publishedAt);
+          const dateB = new Date(b.publishedAt);
+          return dateB - dateA;
+        });
+        setArticles(sortedArticles);
+      });
+    }
   };
 
   const handleFavorite = function (article) {
@@ -108,14 +107,16 @@ export const GlobalProvider = ({ children }) => {
       localStorage.setItem("articles", JSON.stringify([article]));
     } else {
       const articleExist = storedArticles.find(
-        (storedArticle) => storedArticle.id === article.id
+        (storedArticle) =>
+          storedArticle.url === article.url &&
+          storedArticle.category === article.category
       );
       if (!articleExist) {
         storedArticles.push(article);
         localStorage.setItem("articles", JSON.stringify(storedArticles));
       } else {
         const newArticleArray = storedArticles.filter(
-          (el) => el.id !== articleExist.id
+          (el) => el.content !== articleExist.content
         );
         localStorage.setItem("articles", JSON.stringify(newArticleArray));
       }
