@@ -101,6 +101,27 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const handleFavorite = function (article) {
+    const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+    console.log(storedArticles);
+    if (storedArticles.length === 0) {
+      localStorage.setItem("articles", JSON.stringify([article]));
+    } else {
+      const articleExist = storedArticles.find(
+        (storedArticle) => storedArticle.id === article.id
+      );
+      if (!articleExist) {
+        storedArticles.push(article);
+        localStorage.setItem("articles", JSON.stringify(storedArticles));
+      } else {
+        const newArticleArray = storedArticles.filter(
+          (el) => el.id !== articleExist.id
+        );
+        localStorage.setItem("articles", JSON.stringify(newArticleArray));
+      }
+    }
+  };
+
   const globalState = {
     articles,
     setArticles,
@@ -111,6 +132,7 @@ export const GlobalProvider = ({ children }) => {
     handleChangeCategory,
     numArticles,
     handleLoadMore,
+    handleFavorite,
   };
 
   return (

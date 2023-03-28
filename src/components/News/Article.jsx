@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 import "../../styles/Article.css";
 
 const Article = ({ article }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { handleFavorite } = useContext(GlobalContext);
 
   return (
     <div id={article.url} className="article-box">
@@ -15,9 +17,7 @@ const Article = ({ article }) => {
         <div className="author-favorite">
           <p className="article-author">{article.author}</p>
           <i
-            onClick={() =>
-              setIsFavorite((prevState) => (prevState = !prevState))
-            }
+            onClick={() => handleFavorite(article)}
             className={isFavorite ? "fa-solid fa-star" : "fa-regular fa-star"}
           ></i>
         </div>
