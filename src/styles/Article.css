@@ -64,8 +64,14 @@
   color: rgb(119, 119, 119);
 }
 
+.author-favorite {
+  margin: 31px 12px 16px 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .article-author {
-  margin: 31px 0 16px 12px;
+  margin: 0;
   font-weight: 300;
   font-size: 12px;
   line-height: 14px;
@@ -75,4 +81,11 @@
 .article-author:hover {
   cursor: pointer;
   filter: brightness(1.2);
+}
+
+.fa-star {
+  margin: 0;
+}
+.fa-star:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=Article.css.map */

@@ -12,7 +12,15 @@ const Article = ({ article }) => {
       <div className="article-container">
         <p className="article-category">{article.category}</p>
         <p className="article-title">{article.title}</p>
-        <p className="article-author">{article.author}</p>
+        <div className="author-favorite">
+          <p className="article-author">{article.author}</p>
+          <i
+            onClick={() =>
+              setIsFavorite((prevState) => (prevState = !prevState))
+            }
+            className={isFavorite ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+        </div>
       </div>
     </div>
   );

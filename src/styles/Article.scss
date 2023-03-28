@@ -72,8 +72,14 @@
   }
 }
 
+.author-favorite {
+  margin: 31px 12px 16px 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .article-author {
-  margin: 31px 0 16px 12px;
+  margin: 0;
   font-weight: $InterV;
   font-size: 12px;
   line-height: 14px;
@@ -82,5 +88,12 @@
   &:hover {
     cursor: pointer;
     filter: brightness(1.2);
+  }
+}
+
+.fa-star {
+  margin: 0;
+  &:hover {
+    cursor: pointer;
   }
 }

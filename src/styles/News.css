@@ -150,4 +150,8 @@
 }
 .loadMore:hover {
   cursor: pointer;
+}
+
+.fa-star {
+  margin: 31px 12px 16px 0;
 }/*# sourceMappingURL=News.css.map */
