@@ -22,18 +22,18 @@ export const GlobalProvider = ({ children }) => {
 
   // functions //
 
-  useEffect(() => {
-    if (selectedCategory === "Home") {
-      getHomePageArticles().then((articles) => {
-        const sortedArticles = [...articles].sort((a, b) => {
-          const dateA = new Date(a.publishedAt);
-          const dateB = new Date(b.publishedAt);
-          return dateB - dateA;
-        });
-        setArticles(sortedArticles);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (selectedCategory === "Home") {
+  //     getHomePageArticles().then((articles) => {
+  //       const sortedArticles = [...articles].sort((a, b) => {
+  //         const dateA = new Date(a.publishedAt);
+  //         const dateB = new Date(b.publishedAt);
+  //         return dateB - dateA;
+  //       });
+  //       setArticles(sortedArticles);
+  //     });
+  //   }
+  // }, []);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {

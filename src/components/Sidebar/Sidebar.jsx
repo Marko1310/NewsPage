@@ -25,8 +25,19 @@ const Sidebar = () => {
               selectedCategory === el.title ? "selected" : ""
             }`}
           >
-            <img className="icon-image" src={el.imgUrl} />
-            <p className="icon-title">{el.title}</p>
+            <img
+              className={`icon-image + ${
+                selectedCategory === el.title ? "red" : ""
+              }`}
+              src={el.imgUrl}
+            />
+            <p
+              className={`icon-title + ${
+                selectedCategory === el.title ? "redColour" : ""
+              }`}
+            >
+              {el.title}
+            </p>
           </div>
         );
       })}

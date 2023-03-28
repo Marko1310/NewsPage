@@ -29,9 +29,16 @@
 .icon-image {
   max-width: 25px;
   max-height: 25px;
+  filter: invert(1%) sepia(0%) saturate(1392%) hue-rotate(188deg) brightness(0%)
+    contrast(0%);
   &:hover {
     cursor: pointer;
   }
+}
+
+.red {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(33%) saturate(5000%)
+    hue-rotate(345deg) brightness(114%) contrast(99%);
 }
 
 .icon-title {
@@ -42,4 +49,8 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.redColour {
+  color: #bb1e1e;
 }
