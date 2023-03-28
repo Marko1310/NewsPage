@@ -1,4 +1,4 @@
-import "../../styles/News.css";
+import "./styles/News.scss";
 // import articles from "./articles";
 import LatestNews from "./LatestNews.jsx";
 import Article from "./Article.jsx";

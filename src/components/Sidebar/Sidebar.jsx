@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 // css
-import "../../styles/Sidebar.css";
+import "./styles/Sidebar.scss";
 
 // icons
 import icons from "./icons";

@@ -1,5 +1,5 @@
 // css
-import "./App.css";
+import "./App.scss";
 
 // components
 import Navbar from "./components/Navbar/Navbar";

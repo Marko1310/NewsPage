@@ -1,7 +1,16 @@
+// react
 import { useContext, useEffect, useState } from "react";
+
+// css
+import "./styles/Article.scss";
+import "./styles/News.scss";
+import "./styles/Scroll.scss";
+
+// context
 import { GlobalContext } from "../../context/GlobalContext";
-import "../../styles/Article.css";
-import NoImage from "../../../public/assets/images/No_Image.png";
+
+// images
+import NoImage from "../../assets/images/No_Image.png";
 
 const Article = ({ article }) => {
   const [isFavorite, setIsFavorite] = useState(false);

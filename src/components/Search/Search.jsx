@@ -1,6 +1,11 @@
+// react
 import { useContext, useState } from "react";
+
+// context
 import { GlobalContext } from "../../context/GlobalContext";
-import "../../styles/Search.css";
+
+// css
+import "./styles/Search.scss";
 
 const Search = () => {
   const { input, setInput } = useContext(GlobalContext);
