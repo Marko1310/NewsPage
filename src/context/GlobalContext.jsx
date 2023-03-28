@@ -103,7 +103,7 @@ export const GlobalProvider = ({ children }) => {
 
   const handleFavorite = function (article) {
     const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    console.log(storedArticles);
+
     if (storedArticles.length === 0) {
       localStorage.setItem("articles", JSON.stringify([article]));
     } else {

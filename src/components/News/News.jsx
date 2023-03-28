@@ -11,8 +11,6 @@ const News = () => {
   const { numArticles, handleLoadMore } = useContext(GlobalContext);
   const articleSubset = articles.slice(0, numArticles);
 
-  console.log(articles.length, numArticles);
-
   return (
     <div className="news-container">
       <p className="news-title">News</p>

@@ -1,10 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import "../../styles/Article.css";
 
 const Article = ({ article }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { handleFavorite } = useContext(GlobalContext);
+
+  useEffect(() => {
+    const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+    const isStoredArticle = storedArticles.find(
+      (storedArticle) => storedArticle.id === article.id
+    );
+    if (isStoredArticle) setIsFavorite(true);
+    else setIsFavorite(false);
+  }, [isFavorite]);
 
   return (
     <div id={article.url} className="article-box">
@@ -17,7 +26,10 @@ const Article = ({ article }) => {
         <div className="author-favorite">
           <p className="article-author">{article.author}</p>
           <i
-            onClick={() => handleFavorite(article)}
+            onClick={() => {
+              setIsFavorite((prevState) => (prevState = !prevState));
+              handleFavorite(article);
+            }}
             className={isFavorite ? "fa-solid fa-star" : "fa-regular fa-star"}
           ></i>
         </div>
