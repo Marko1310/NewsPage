@@ -10,6 +10,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 const News = () => {
   const { articles, filteredArticles, numArticles, handleLoadMore } =
     useContext(GlobalContext);
+
   const articleSubset =
     filteredArticles.length > 0
       ? filteredArticles

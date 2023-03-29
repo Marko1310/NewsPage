@@ -16,14 +16,22 @@ export const GlobalProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [numArticles, setNumArticles] = useState(19);
   const [input, setInput] = useState("");
 
   // functions //
 
+  let timeout;
+  const setLoadingTimeout = () => {
+    timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
+
   useEffect(() => {
     if (selectedCategory === "Home") {
+      setLoadingTimeout();
       getHomePageArticles().then((articles) => {
         const sortedArticles = [...articles].sort((a, b) => {
           const dateA = new Date(a.publishedAt);
@@ -31,12 +39,16 @@ export const GlobalProvider = ({ children }) => {
           return dateB - dateA;
         });
         setArticles(sortedArticles);
+        clearTimeout(timeout);
+        setLoading(false);
       });
     }
   }, []);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
+    setLoadingTimeout();
+
     const articles = [];
     const response = await axios.get(
       `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
@@ -46,6 +58,8 @@ export const GlobalProvider = ({ children }) => {
 
       articles.push(newArticle);
     });
+    clearTimeout(timeout);
+    setLoading(false);
     return articles;
   }
 
@@ -154,6 +168,7 @@ export const GlobalProvider = ({ children }) => {
     setInput,
     filteredArticles,
     API_KEY,
+    setLoadingTimeout,
   };
 
   return (

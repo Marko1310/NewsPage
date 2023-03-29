@@ -57,9 +57,9 @@ const LatestNews = () => {
             loader={
               <h4
                 style={{
-                  "margin-left": "15px",
-                  fontWeight: "500",
-                  fontSize: "14px",
+                  marginLeft: "15px",
+                  fontWeight: "200",
+                  fontSize: "16 px",
                   lineHeight: "16px",
                   letteSpacing: "-0.0153846px",
                   color: "#000000",
