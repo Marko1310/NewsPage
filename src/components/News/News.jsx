@@ -1,10 +1,14 @@
+// react
+import { useContext } from "react";
+
+// css
 import "./styles/News.scss";
-// import articles from "./articles";
+
+// components
 import LatestNews from "./LatestNews.jsx";
 import Article from "./Article.jsx";
 
-import { useContext } from "react";
-
+//context
 import { GlobalContext } from "../../context/GlobalContext";
 
 const News = () => {
@@ -15,7 +19,6 @@ const News = () => {
   return (
     <div className="news-container">
       <p className="news-title">News</p>
-
       <div className="news-gridLayout">
         {articlesToRender.map((article) => {
           return <Article article={article} />;

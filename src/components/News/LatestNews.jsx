@@ -1,7 +1,12 @@
+//react
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+
+// components
 import EachLatestNews from "./EachLatestNews.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-import axios from "axios";
+
+//context
 import { GlobalContext } from "../../context/GlobalContext.jsx";
 
 const LatestNews = () => {

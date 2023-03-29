@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
+import useMatchMedia from "react-use-match-media";
+
 // create Context
 export const GlobalContext = createContext();
 
@@ -12,12 +14,16 @@ export const GlobalProvider = ({ children }) => {
   const API_KEY = "03a53c477965493ab56337906674304e";
   // const API_KEY = "bde9b689a4584be0bd5757718405f691";
   // const API_KEY = "f72818b798474a18b18661aea91ec437";
+
   // states //
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
+
+  const isMobilePhone = useMatchMedia("(min-width: 480px)");
+  const isTablet = useMatchMedia("(min-width: 768px)");
 
   // functions //
 
@@ -68,10 +74,13 @@ export const GlobalProvider = ({ children }) => {
         `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
       );
       const allArticles = responseArticles.data.articles;
+      console.log(allArticles);
+
       const responseSources = await axios.get(
         `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}&pageSize=100`
       );
       const allSources = responseSources.data.sources;
+      console.log(allSources);
 
       const articlesWithCategory = [];
       allArticles.map((el) => {
@@ -178,7 +187,8 @@ export const GlobalProvider = ({ children }) => {
     setInput,
     filteredArticles,
     API_KEY,
-    // setLoadingTimeout,
+    isMobilePhone,
+    isTablet,
   };
 
   return (
