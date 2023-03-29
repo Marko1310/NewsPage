@@ -17,7 +17,6 @@ export const GlobalProvider = ({ children }) => {
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
-  const [numArticles, setNumArticles] = useState(19);
   const [input, setInput] = useState("");
 
   // functions //
@@ -107,10 +106,6 @@ export const GlobalProvider = ({ children }) => {
     return articlesWithCategory;
   }
 
-  // const handleLoadMore = function () {
-  //   setNumArticles(numArticles + 18);
-  // };
-
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
@@ -189,8 +184,6 @@ export const GlobalProvider = ({ children }) => {
     loading,
     setLoading,
     handleChangeCategory,
-    numArticles,
-    // handleLoadMore,
     handleFavorite,
     handleSearchSumbit,
     input,

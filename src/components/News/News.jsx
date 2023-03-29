@@ -11,11 +11,6 @@ const News = () => {
   const { articles, filteredArticles, numArticles, handleLoadMore } =
     useContext(GlobalContext);
 
-  // const articleSubset =
-  //   filteredArticles.length > 0
-  //     ? filteredArticles
-  //     : articles.slice(0, numArticles);
-
   return (
     <div className="news-container">
       <p className="news-title">News</p>
@@ -26,11 +21,6 @@ const News = () => {
         })}
         <LatestNews />
       </div>
-      {/* {numArticles < articles.length && filteredArticles.length === 0 && (
-        <p onClick={() => handleLoadMore()} className="loadMore">
-          Load more...
-        </p>
-      )} */}
     </div>
   );
 };
