@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
 // create Context
 export const GlobalContext = createContext();
@@ -42,8 +41,7 @@ export const GlobalProvider = ({ children }) => {
       `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
     );
     response.data.articles.map((el) => {
-      const id = uuidv4();
-      const newArticle = { ...el, id: id, category: category };
+      const newArticle = { ...el, category: category };
 
       articles.push(newArticle);
     });

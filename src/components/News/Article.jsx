@@ -26,7 +26,7 @@ const Article = ({ article }) => {
   }, [article]);
 
   return (
-    <div id={article.id} className="article-box">
+    <div className="article-box">
       <div className="article-image-container">
         <img
           className="article-image"
