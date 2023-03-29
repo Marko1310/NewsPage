@@ -10,7 +10,6 @@ import "./styles/Search.scss";
 const Search = () => {
   const { input, setInput } = useContext(GlobalContext);
   const { handleSearchSumbit } = useContext(GlobalContext);
-  console.log(input);
   return (
     <div className="titleSearch-container">
       <p className="title">

@@ -21,13 +21,6 @@ export const GlobalProvider = ({ children }) => {
 
   // functions //
 
-  let timeout;
-  const setLoadingTimeout = () => {
-    timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-  };
-
   useEffect(() => {
     getHomePageArticles().then((articles) => {
       const sortedArticles = [...articles].sort((a, b) => {
@@ -35,44 +28,30 @@ export const GlobalProvider = ({ children }) => {
         const dateB = new Date(b.publishedAt);
         return dateB - dateA;
       });
+      setLoading(false);
       setArticles(sortedArticles);
     });
+    return () => {};
   }, []);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
-    const articlesCategory = [];
-    const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
-    );
-    response.data.articles.map((el) => {
-      const newArticle = { ...el, category: category };
-      articlesCategory.push(newArticle);
-    });
-    return articlesCategory;
+    setLoading(true);
+    try {
+      const articlesCategory = [];
+      const response = await axios.get(
+        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+      );
+      response.data.articles.map((el) => {
+        const newArticle = { ...el, category: category };
+        articlesCategory.push(newArticle);
+      });
+      setLoading(false);
+      return articlesCategory;
+    } catch (err) {
+      console.log(err);
+    }
   }
-
-  // function to fetch all articles:
-  // 1. fetch articles for each category
-  // 2. add a category key
-  // 3. push each set of array into global array
-  // 4. update state with global array
-  // const categories = [
-  //   "business",
-  //   "entertainment",
-  //   "general",
-  //   "health",
-  //   "science",
-  //   "sports",
-  //   "technology",
-  // ];
-  // const allArticles = [];
-  // for (const category of categories) {
-  //   const articles = await getArticlesByCategory(category);
-  //   allArticles.push(...articles);
-  // }
-  // return allArticles;
-
   // function to fetch all articles:
   // 1. fetch Top headlines
   // 2. fetch Sources
@@ -80,30 +59,35 @@ export const GlobalProvider = ({ children }) => {
   // 4. if thet match, add category from the source to each article, if not set to blank
 
   async function getHomePageArticles() {
-    const responseArticles = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
-    );
-    const allArticles = responseArticles.data.articles;
-
-    const responseSources = await axios.get(
-      `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}&pageSize=100`
-    );
-    const allSources = responseSources.data.sources;
-
-    const articlesWithCategory = [];
-    allArticles.map((el) => {
-      const matchingSource = allSources.find(
-        (source) => source.id === el.source.id
+    setLoading(true);
+    try {
+      const responseArticles = await axios.get(
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
       );
-      let newArticle;
-      if (matchingSource) {
-        newArticle = { ...el, category: matchingSource.category };
-      } else {
-        newArticle = { ...el, category: "" };
-      }
-      articlesWithCategory.push(newArticle);
-    });
-    return articlesWithCategory;
+      const allArticles = responseArticles.data.articles;
+      const responseSources = await axios.get(
+        `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}&pageSize=100`
+      );
+      const allSources = responseSources.data.sources;
+
+      const articlesWithCategory = [];
+      allArticles.map((el) => {
+        const matchingSource = allSources.find(
+          (source) => source.id === el.source.id
+        );
+        let newArticle;
+        if (matchingSource) {
+          newArticle = { ...el, category: matchingSource.category };
+        } else {
+          newArticle = { ...el, category: "" };
+        }
+        articlesWithCategory.push(newArticle);
+      });
+      setLoading(false);
+      return articlesWithCategory;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // change sidebar category and fetch category news and sort them
@@ -165,14 +149,17 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const handleSearchSumbit = function (e, input) {
+    setLoading(true);
     e.preventDefault();
     if (input !== "") {
       const filteredArticles = articles.filter((article) =>
         article.title.toLowerCase().includes(input.toLowerCase())
       );
       setFilteredArticles(filteredArticles);
+      setLoading(false);
     } else {
       setFilteredArticles("");
+      setLoading(false);
     }
   };
 
@@ -190,7 +177,7 @@ export const GlobalProvider = ({ children }) => {
     setInput,
     filteredArticles,
     API_KEY,
-    setLoadingTimeout,
+    // setLoadingTimeout,
   };
 
   return (

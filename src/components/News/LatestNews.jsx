@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import Scroll from "./Scroll.jsx";
-// import latestNews from "./latestNews.js";
 import EachLatestNews from "./EachLatestNews.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { GlobalContext } from "../../context/GlobalContext.jsx";
 
 const LatestNews = () => {
-  const [pageSize, setPageSize] = useState(20);
+  const pageSize = 20;
   const [page, setPage] = useState(1);
   const [latestNews, setLatestNews] = useState([]);
   const [error, setError] = useState(null);
@@ -23,7 +21,6 @@ const LatestNews = () => {
   }, []);
 
   const fetchMoreData = () => {
-    console.log(page);
     setTimeout(() => {
       axios
         .get(
@@ -34,7 +31,6 @@ const LatestNews = () => {
             ...prevState,
             ...response.data.articles,
           ]);
-          console.log(response.data.articles);
         })
         .catch((err) => setError(err));
     }, 1500);
@@ -58,11 +54,11 @@ const LatestNews = () => {
               <h4
                 style={{
                   marginLeft: "15px",
-                  fontWeight: "200",
+                  fontWeight: "400",
                   fontSize: "16 px",
                   lineHeight: "16px",
                   letteSpacing: "-0.0153846px",
-                  color: "#000000",
+                  color: "#1e71bb",
                 }}
               >
                 Loading...
