@@ -8,13 +8,13 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   // API key
   // const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
-  const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
-  // const API_KEY = "03a53c477965493ab56337906674304e";
+  // const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
+  const API_KEY = "03a53c477965493ab56337906674304e";
   // const API_KEY = "bde9b689a4584be0bd5757718405f691";
   // const API_KEY = "f72818b798474a18b18661aea91ec437";
   // states //
   const [articles, setArticles] = useState([]);
-  const [filteredArticles, setFilteredArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
@@ -37,6 +37,7 @@ export const GlobalProvider = ({ children }) => {
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
     setLoading(true);
+    setInput("");
     try {
       const articlesCategory = [];
       const response = await axios.get(
@@ -60,6 +61,8 @@ export const GlobalProvider = ({ children }) => {
 
   async function getHomePageArticles() {
     setLoading(true);
+    setInput("");
+
     try {
       const responseArticles = await axios.get(
         `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
@@ -93,6 +96,8 @@ export const GlobalProvider = ({ children }) => {
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
+    setInput("");
+
     if (category === "Favorites") {
       const storedArticles =
         JSON.parse(localStorage.getItem("favoriteArticles")) || [];
@@ -151,16 +156,12 @@ export const GlobalProvider = ({ children }) => {
   const handleSearchSumbit = function (e, input) {
     setLoading(true);
     e.preventDefault();
-    if (input !== "") {
-      const filteredArticles = articles.filter((article) =>
-        article.title.toLowerCase().includes(input.toLowerCase())
-      );
-      setFilteredArticles(filteredArticles);
-      setLoading(false);
-    } else {
-      setFilteredArticles("");
-      setLoading(false);
-    }
+
+    const filteredArticles = articles.filter((article) =>
+      article.title.toLowerCase().includes(input.toLowerCase())
+    );
+    setFilteredArticles(filteredArticles);
+    setLoading(false);
   };
 
   const globalState = {

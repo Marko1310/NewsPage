@@ -10,8 +10,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 const News = () => {
   const { articles, filteredArticles } = useContext(GlobalContext);
 
-  const articlesToRender =
-    filteredArticles.length > 0 ? filteredArticles : articles;
+  const articlesToRender = filteredArticles ? filteredArticles : articles;
 
   return (
     <div className="news-container">

@@ -25,6 +25,7 @@ const Search = () => {
             className="search-input"
             type="text"
             placeholder="Search news"
+            value={input}
           ></input>
           <button className="search-button" type="submit">
             Search
