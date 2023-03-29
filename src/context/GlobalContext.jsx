@@ -23,8 +23,9 @@ export const GlobalProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [featuredLatest, setFeaturedLatest] = useState("featured");
 
-  const isSmallViewport = useMatchMedia("(min-width: 480px)");
-  const isMediumViewport = useMatchMedia("(min-width: 768px)");
+  // viewPorts
+  const notSmallViewport = useMatchMedia("(min-width: 480px)");
+  const notMediumViewport = useMatchMedia("(min-width: 768px)");
 
   // functions //
 
@@ -188,8 +189,8 @@ export const GlobalProvider = ({ children }) => {
     setInput,
     filteredArticles,
     API_KEY,
-    isSmallViewport,
-    isMediumViewport,
+    notSmallViewport,
+    notMediumViewport,
     featuredLatest,
     setFeaturedLatest,
   };

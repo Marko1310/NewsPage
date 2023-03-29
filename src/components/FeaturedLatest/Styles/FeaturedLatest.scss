@@ -1,0 +1,29 @@
+@import "../../../Variables.scss";
+
+.featuredLatest-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.featuredLatest-container-button {
+  margin: 0 5px;
+  font-weight: $InterV;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.0246154px;
+  width: 81px;
+  height: 40px;
+  background: none;
+  border: #1d1d1b;
+  border-radius: 20px;
+  padding: 0;
+}
+
+.selectedButton {
+  color: #bb1e1e;
+  background: rgba(187, 30, 30, 0.1);
+  border-radius: 20px;
+  border-width: 0;
+}

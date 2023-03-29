@@ -38,7 +38,7 @@ const Article = ({ article }) => {
         <p className="article-category">{article.category}</p>
         <p className="article-title">{article.title}</p>
         <div className="author-favorite">
-          <p className="article-author">{article.author}</p>
+          {<p className="article-author">{article.author}</p>}
           <i
             onClick={() => {
               setIsFavorite((prevState) => (prevState = !prevState));

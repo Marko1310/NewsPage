@@ -13,17 +13,19 @@ import Navbar from "./components/Navbar/Navbar";
 import Search from "./components/Search/Search";
 import Sidebar from "./components/Sidebar/Sidebar";
 import News from "./components/News/News";
+import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 
 function App() {
-  const { loading, isSmallViewport } = useContext(GlobalContext);
+  const { loading, notSmallViewport } = useContext(GlobalContext);
 
   return (
     <div className="App">
-      {isSmallViewport && <Navbar />}
+      {notSmallViewport && <Navbar />}
       <div className="main-container">
         <Search />
+        <FeaturedLatest />
         <div className="grid-container">
-          {isSmallViewport && <Sidebar />}
+          {notSmallViewport && <Sidebar />}
           {loading ? (
             <div className="loading">
               <ThreeDots

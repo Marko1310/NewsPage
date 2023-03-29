@@ -102,3 +102,9 @@
     cursor: pointer;
   }
 }
+
+@media all and (max-width: 480px) {
+  .article-author {
+    visibility: hidden;
+  }
+}

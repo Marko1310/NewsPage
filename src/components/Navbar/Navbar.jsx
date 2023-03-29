@@ -6,12 +6,12 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const Navbar = () => {
-  const { isMediumViewport } = useContext(GlobalContext);
+  const { notMediumViewport } = useContext(GlobalContext);
   return (
     <div className="navbar-container">
       <div className="navbar-text-container">
         <p className="navbar-text-left">Make MyNews your homepage</p>
-        {isMediumViewport && (
+        {notMediumViewport && (
           <p className="navbar-text-center">
             Every day discover what's trending on the internet!
           </p>

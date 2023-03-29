@@ -12,19 +12,25 @@ import Article from "./Article.jsx";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const News = () => {
-  const { articles, filteredArticles, isSMallViewport, featuredLatest } =
+  const { articles, filteredArticles, notSmallViewport, featuredLatest } =
     useContext(GlobalContext);
 
   const articlesToRender = filteredArticles ? filteredArticles : articles;
 
   return (
     <div className="news-container">
-      {isSMallViewport && <p className="news-title">News</p>}
+      {notSmallViewport && <p className="news-title">News</p>}
       <div className="news-gridLayout">
         {articlesToRender.map((article) => {
+          if (notSmallViewport) {
+            return <Article article={article} />;
+          } else if (!notSmallViewport && featuredLatest !== "featured") {
+            return null;
+          }
           return <Article article={article} />;
         })}
-        {!isSMallViewport && featuredLatest === "latest" && <LatestNews />}
+        {notSmallViewport && <LatestNews />}
+        {!notSmallViewport && featuredLatest === "latest" && <LatestNews />}
       </div>
     </div>
   );
