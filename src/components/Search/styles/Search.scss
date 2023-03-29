@@ -6,7 +6,7 @@
   border-bottom: 1px solid rgba(151, 151, 151, 0.1);
   width: 100%;
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 .title {
@@ -84,5 +84,41 @@
   &:hover {
     cursor: pointer;
     filter: brightness(1.2);
+  }
+}
+
+@media all and (max-width: 480px) {
+  .titleSearch-container {
+    flex-direction: column;
+    border-bottom: none;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .title {
+    position: absolute;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: $InterV_ExtraBold;
+    color: #1d1d1b;
+    width: 139px;
+    left: 16px;
+    top: 24px;
+    & span {
+      color: #bb1e1e;
+    }
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    // margin-left: 16px;
+    // margin-right: 16px;
+    // padding-left: 16px;
+    // padding-right: 16px;
+    // margin-right: auto;
+    margin-top: 73px;
+    margin-bottom: 28px;
   }
 }

@@ -15,15 +15,15 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import News from "./components/News/News";
 
 function App() {
-  const { loading, isMobilePhone } = useContext(GlobalContext);
+  const { loading, isSmallViewport } = useContext(GlobalContext);
 
   return (
     <div className="App">
-      {isMobilePhone && <Navbar />}
+      {isSmallViewport && <Navbar />}
       <div className="main-container">
         <Search />
         <div className="grid-container">
-          {isMobilePhone && <Sidebar />}
+          {isSmallViewport && <Sidebar />}
           {loading ? (
             <div className="loading">
               <ThreeDots

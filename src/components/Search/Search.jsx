@@ -9,7 +9,7 @@ import "./styles/Search.scss";
 
 const Search = () => {
   const { input, setInput } = useContext(GlobalContext);
-  const { handleSearchSumbit } = useContext(GlobalContext);
+  const { handleSearchSumbit, isSMallViewport } = useContext(GlobalContext);
   return (
     <div className="titleSearch-container">
       <p className="title">
@@ -27,9 +27,11 @@ const Search = () => {
             placeholder="Search news"
             value={input}
           ></input>
-          <button className="search-button" type="submit">
-            Search
-          </button>
+          {isSMallViewport && (
+            <button className="search-button" type="submit">
+              Search
+            </button>
+          )}
         </form>
       </div>
     </div>
