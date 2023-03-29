@@ -10,6 +10,7 @@ const LatestNews = () => {
   const [pageSize, setPageSize] = useState(20);
   const [page, setPage] = useState(1);
   const [latestNews, setLatestNews] = useState([]);
+  const [error, setError] = useState(null);
   const { API_KEY } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -34,7 +35,8 @@ const LatestNews = () => {
             ...response.data.articles,
           ]);
           console.log(response.data.articles);
-        });
+        })
+        .catch((err) => setError(err));
     }, 1500);
     setPage((prevState) => prevState + 1);
   };
@@ -51,7 +53,7 @@ const LatestNews = () => {
           <InfiniteScroll
             dataLength={latestNews.length}
             next={fetchMoreData}
-            hasMore={true}
+            hasMore={!error ? true : false}
             loader={
               <h4
                 style={{

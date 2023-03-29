@@ -78,9 +78,6 @@
   margin: 15px 12px 16px 12px;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .article-author {
@@ -90,6 +87,9 @@
   line-height: 14px;
   letter-spacing: -0.0675px;
   color: #1d1d1b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
     filter: brightness(1.2);
