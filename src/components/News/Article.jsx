@@ -17,7 +17,8 @@ const Article = ({ article }) => {
   const { handleFavorite } = useContext(GlobalContext);
 
   useEffect(() => {
-    const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+    const storedArticles =
+      JSON.parse(localStorage.getItem("favoriteArticles")) || [];
     const isStoredArticle = storedArticles.find(
       (storedArticle) => storedArticle.url === article.url
     );

@@ -7,8 +7,8 @@ export const GlobalContext = createContext();
 // provider component
 export const GlobalProvider = ({ children }) => {
   // API key
-  const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
-  // const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
+  // const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
+  const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
   // const API_KEY = "03a53c477965493ab56337906674304e";
   // const API_KEY = "bde9b689a4584be0bd5757718405f691";
   // const API_KEY = "f72818b798474a18b18661aea91ec437";
@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Home");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [numArticles, setNumArticles] = useState(19);
   const [input, setInput] = useState("");
 
@@ -30,37 +30,27 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (selectedCategory === "Home") {
-      setLoadingTimeout();
-      getHomePageArticles().then((articles) => {
-        const sortedArticles = [...articles].sort((a, b) => {
-          const dateA = new Date(a.publishedAt);
-          const dateB = new Date(b.publishedAt);
-          return dateB - dateA;
-        });
-        setArticles(sortedArticles);
-        clearTimeout(timeout);
-        setLoading(false);
+    getHomePageArticles().then((articles) => {
+      const sortedArticles = [...articles].sort((a, b) => {
+        const dateA = new Date(a.publishedAt);
+        const dateB = new Date(b.publishedAt);
+        return dateB - dateA;
       });
-    }
+      setArticles(sortedArticles);
+    });
   }, []);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
-    setLoadingTimeout();
-
-    const articles = [];
+    const articlesCategory = [];
     const response = await axios.get(
       `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
     );
     response.data.articles.map((el) => {
       const newArticle = { ...el, category: category };
-
-      articles.push(newArticle);
+      articlesCategory.push(newArticle);
     });
-    clearTimeout(timeout);
-    setLoading(false);
-    return articles;
+    return articlesCategory;
   }
 
   // function to fetch all articles:
@@ -68,33 +58,65 @@ export const GlobalProvider = ({ children }) => {
   // 2. add a category key
   // 3. push each set of array into global array
   // 4. update state with global array
+  // const categories = [
+  //   "business",
+  //   "entertainment",
+  //   "general",
+  //   "health",
+  //   "science",
+  //   "sports",
+  //   "technology",
+  // ];
+  // const allArticles = [];
+  // for (const category of categories) {
+  //   const articles = await getArticlesByCategory(category);
+  //   allArticles.push(...articles);
+  // }
+  // return allArticles;
+
+  // function to fetch all articles:
+  // 1. fetch Top headlines
+  // 2. fetch Sources
+  // 3. find source in each article and coresponding source in Sources
+  // 4. if thet match, add category from the source to each article, if not set to blank
+
   async function getHomePageArticles() {
-    const categories = [
-      "business",
-      "entertainment",
-      "general",
-      "health",
-      "science",
-      "sports",
-      "technology",
-    ];
-    const allArticles = [];
-    for (const category of categories) {
-      const articles = await getArticlesByCategory(category);
-      allArticles.push(...articles);
-    }
-    return allArticles;
+    const responseArticles = await axios.get(
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
+    );
+    const allArticles = responseArticles.data.articles;
+
+    const responseSources = await axios.get(
+      `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}&pageSize=100`
+    );
+    const allSources = responseSources.data.sources;
+
+    const articlesWithCategory = [];
+    allArticles.map((el) => {
+      const matchingSource = allSources.find(
+        (source) => source.id === el.source.id
+      );
+      let newArticle;
+      if (matchingSource) {
+        newArticle = { ...el, category: matchingSource.category };
+      } else {
+        newArticle = { ...el, category: "" };
+      }
+      articlesWithCategory.push(newArticle);
+    });
+    return articlesWithCategory;
   }
 
-  const handleLoadMore = function () {
-    setNumArticles(numArticles + 18);
-  };
+  // const handleLoadMore = function () {
+  //   setNumArticles(numArticles + 18);
+  // };
 
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
     if (category === "Favorites") {
-      const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+      const storedArticles =
+        JSON.parse(localStorage.getItem("favoriteArticles")) || [];
       setArticles(storedArticles);
     } else if (category === "Home") {
       getHomePageArticles().then((articles) => {
@@ -118,10 +140,11 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const handleFavorite = function (article) {
-    const storedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+    const storedArticles =
+      JSON.parse(localStorage.getItem("favoriteArticles")) || [];
 
     if (storedArticles.length === 0) {
-      localStorage.setItem("articles", JSON.stringify([article]));
+      localStorage.setItem("favoriteArticles", JSON.stringify([article]));
     } else {
       const articleExist = storedArticles.find(
         (storedArticle) =>
@@ -130,12 +153,18 @@ export const GlobalProvider = ({ children }) => {
       );
       if (!articleExist) {
         storedArticles.push(article);
-        localStorage.setItem("articles", JSON.stringify(storedArticles));
+        localStorage.setItem(
+          "favoriteArticles",
+          JSON.stringify(storedArticles)
+        );
       } else {
         const newArticleArray = storedArticles.filter(
           (el) => el.content !== articleExist.content
         );
-        localStorage.setItem("articles", JSON.stringify(newArticleArray));
+        localStorage.setItem(
+          "favoriteArticles",
+          JSON.stringify(newArticleArray)
+        );
       }
     }
   };
@@ -161,7 +190,7 @@ export const GlobalProvider = ({ children }) => {
     setLoading,
     handleChangeCategory,
     numArticles,
-    handleLoadMore,
+    // handleLoadMore,
     handleFavorite,
     handleSearchSumbit,
     input,
