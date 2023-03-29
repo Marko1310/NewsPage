@@ -22,6 +22,7 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [featuredLatest, setFeaturedLatest] = useState("featured");
+  const [menu, setMenu] = useState(false);
 
   // viewPorts
   const notSmallViewport = useMatchMedia("(min-width: 480px)");
@@ -193,6 +194,8 @@ export const GlobalProvider = ({ children }) => {
     notMediumViewport,
     featuredLatest,
     setFeaturedLatest,
+    menu,
+    setMenu,
   };
 
   return (

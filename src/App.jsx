@@ -14,12 +14,14 @@ import Search from "./components/Search/Search";
 import Sidebar from "./components/Sidebar/Sidebar";
 import News from "./components/News/News";
 import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   const { loading, notSmallViewport } = useContext(GlobalContext);
 
   return (
     <div className="App">
+      <Menu />
       {notSmallViewport && <Navbar />}
       <div className="main-container">
         <Search />
