@@ -9,6 +9,8 @@ import "./App.scss";
 // context
 import { GlobalContext } from "./context/GlobalContext";
 
+import services from "./services/service.js";
+
 // components
 import Navbar from "./components/Navbar/Navbar";
 import Search from "./components/Search/Search";
@@ -29,26 +31,12 @@ function App() {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    axios
-      .get(
-        `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}`
-      )
-      .then((data) => {
-        setSources(data.data.sources);
-      });
+    services.getSources().then((sources) => setSources(sources));
   }, []);
 
   useEffect(() => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
-    if (category !== "Home") {
-      url += `&category=${category}`;
-    }
-
-    if (query) {
-      url += `&q=${query}`;
-    }
-    axios.get(url).then((data) => {
-      setArticles(data.data.articles);
+    services.getArticles(category, query).then((articles) => {
+      setArticles(articles);
     });
   }, [category, query]);
 

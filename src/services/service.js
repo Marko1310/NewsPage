@@ -1,13 +1,14 @@
 import axios from "axios";
 
-const API_KEY = "f72818b798474a18b18661aea91ec437";
+const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
 
 const getSources = function () {
-  axios
+  return axios
     .get(
       `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}`
     )
     .then((data) => {
+      console.log(data.data.sources);
       return data.data.sources;
     });
 };
@@ -22,7 +23,7 @@ const getArticles = function (category, query) {
   if (query) {
     url += `&q=${query}`;
   }
-  axios.get(url).then((data) => {
+  return axios.get(url).then((data) => {
     return data.data.articles;
   });
 };
