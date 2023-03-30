@@ -10,7 +10,7 @@ export default [
     id: 2,
   },
   {
-    imgUrl: "../../../public/assets/icons/Business2.svg",
+    imgUrl: "../../../public/assets/icons/Business.svg",
     title: "Business",
     id: 3,
   },

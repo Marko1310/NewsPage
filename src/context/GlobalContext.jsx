@@ -22,7 +22,7 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [featuredLatest, setFeaturedLatest] = useState("featured");
-  const [menu, setMenu] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   // viewPorts
   const notSmallViewport = useMatchMedia("(min-width: 480px)");
@@ -40,7 +40,7 @@ export const GlobalProvider = ({ children }) => {
       setLoading(false);
       setArticles(sortedArticles);
     });
-    if (notSmallViewport) setMenu(false);
+    if (notSmallViewport) setIsMenuOpen(false);
   }, [notSmallViewport]);
 
   // function to fetch by categorie:
@@ -108,7 +108,7 @@ export const GlobalProvider = ({ children }) => {
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
-    if (menu) setMenu(false);
+    if (isMenuOpen) setIsMenuOpen(false);
 
     setInput("");
 
@@ -169,7 +169,7 @@ export const GlobalProvider = ({ children }) => {
 
   const handleSearchSumbit = function (e, input) {
     setLoading(true);
-    setMenu(false);
+    setIsMenuOpen(false);
     e.preventDefault();
 
     const filteredArticles = articles.filter((article) =>
@@ -197,8 +197,8 @@ export const GlobalProvider = ({ children }) => {
     notMediumViewport,
     featuredLatest,
     setFeaturedLatest,
-    menu,
-    setMenu,
+    isMenuOpen,
+    setIsMenuOpen,
   };
 
   return (

@@ -17,15 +17,15 @@ import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 import Menu from "./components/Menu/Menu";
 
 function App() {
-  const { loading, notSmallViewport, menu } = useContext(GlobalContext);
+  const { loading, notSmallViewport, isMenuOpen } = useContext(GlobalContext);
 
   return (
     <div className="App">
-      {menu && <Menu />}
+      {isMenuOpen && <Menu />}
       {notSmallViewport && <Navbar />}
       <div className="main-container">
-        {!menu && <Search />}
-        {!menu && !notSmallViewport && <FeaturedLatest />}
+        {!isMenuOpen && <Search />}
+        {!isMenuOpen && !notSmallViewport && <FeaturedLatest />}
         <div className="grid-container">
           {notSmallViewport && <Sidebar />}
           {loading ? (
@@ -43,7 +43,7 @@ function App() {
               <h2 className="loading-title">Loading</h2>
             </div>
           ) : (
-            !menu && <News />
+            !isMenuOpen && <News />
           )}
         </div>
       </div>

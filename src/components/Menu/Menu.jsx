@@ -16,12 +16,12 @@ import Search from "../Search/Search";
 const Menu = () => {
   const { selectedCategory } = useContext(GlobalContext);
   const { handleChangeCategory } = useContext(GlobalContext);
-  const { setMenu } = useContext(GlobalContext);
+  const { setIsMenuOpen } = useContext(GlobalContext);
 
   return (
     <div className="menu-container">
       <img
-        onClick={() => setMenu((prevState) => !prevState)}
+        onClick={() => setIsMenuOpen((prevState) => !prevState)}
         className="menuIcons"
         src={menuX}
       />

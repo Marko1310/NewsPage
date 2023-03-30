@@ -12,22 +12,22 @@ import menuLines from "../../../public/assets/icons/Three.svg";
 
 const Search = () => {
   const { input, setInput } = useContext(GlobalContext);
-  const { handleSearchSumbit, notSmallViewport, setMenu, menu } =
+  const { handleSearchSumbit, notSmallViewport, isMenuOpen, setIsMenuOpen } =
     useContext(GlobalContext);
 
   return (
-    <div className={`titleSearch-container ${menu ? "menu" : ""}`}>
-      <p className={`title ${menu ? "center" : ""}`}>
+    <div className={`titleSearch-container ${isMenuOpen ? "menu" : ""}`}>
+      <p className={`title ${isMenuOpen ? "center" : ""}`}>
         <span>My</span>News
       </p>
-      {!notSmallViewport && !menu && (
+      {!notSmallViewport && !isMenuOpen && (
         <img
-          onClick={() => setMenu((prevState) => !prevState)}
+          onClick={() => setIsMenuOpen((prevState) => !prevState)}
           className="menuIcons"
           src={menuLines}
         />
       )}
-      <div className={`search-container ${menu ? "menu" : ""}`}>
+      <div className={`search-container ${isMenuOpen ? "menu" : ""}`}>
         <form
           onSubmit={(e) => handleSearchSumbit(e, input)}
           className="search-form"
