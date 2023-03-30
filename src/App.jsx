@@ -61,7 +61,6 @@ function App() {
         {!isMenuOpen && (
           <Search
             queryUpdate={(q) => {
-              console.log(q);
               setQuery(q);
             }}
             query={query}
