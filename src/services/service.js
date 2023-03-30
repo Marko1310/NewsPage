@@ -8,7 +8,6 @@ const getSources = function () {
       `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}`
     )
     .then((data) => {
-      console.log(data.data.sources);
       return data.data.sources;
     })
     .catch((err) => console.log(err));
@@ -32,7 +31,19 @@ const getArticles = function (category, query) {
     .catch((err) => console.log(err));
 };
 
+const getLatestNews = function (pageSize, page) {
+  return axios
+    .get(
+      `https://newsapi.org/v2/everything?domains=bbc.co.uk&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`
+    )
+    .then((response) => {
+      return response.data.articles;
+    });
+  setPage(2);
+};
+
 export default {
   getSources,
   getArticles,
+  getLatestNews,
 };

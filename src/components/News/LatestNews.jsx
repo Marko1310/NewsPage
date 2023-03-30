@@ -9,39 +9,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 //context
 import { GlobalContext } from "../../context/GlobalContext.jsx";
 
-const LatestNews = () => {
-  const pageSize = 20;
-  const [page, setPage] = useState(1);
-  const [latestNews, setLatestNews] = useState([]);
-  const [error, setError] = useState(null);
-  const { API_KEY } = useContext(GlobalContext);
+// services
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?domains=bbc.co.uk&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`
-      )
-      .then((response) => setLatestNews(response.data.articles));
-    setPage(2);
-  }, []);
-
-  const fetchMoreData = () => {
-    setTimeout(() => {
-      axios
-        .get(
-          `https://newsapi.org/v2/everything?domains=bbc.co.uk&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`
-        )
-        .then((response) => {
-          setLatestNews((prevState) => [
-            ...prevState,
-            ...response.data.articles,
-          ]);
-        })
-        .catch((err) => setError(err));
-    }, 1500);
-    setPage((prevState) => prevState + 1);
-  };
-
+const LatestNews = ({ fetchMoreData, latestNews, error }) => {
   return (
     <div className="latestNews-container">
       <div className="latest-title-container">

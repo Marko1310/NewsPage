@@ -20,17 +20,30 @@ import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 import Menu from "./components/Menu/Menu";
 
 function App() {
+  // genereal state
   const { notSmallViewport, isMenuOpen } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(false);
+
+  // news grid state
   const [category, setCategory] = useState("Home");
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [sources, setSources] = useState([]);
   const [query, setQuery] = useState("");
 
+  // latest news state
+  const [latestNews, setLatestNews] = useState([]);
+  const pageSize = 20;
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState(null);
+
+  // functions//
+
+  // get sources
   useEffect(() => {
     services.getSources().then((sources) => setSources(sources));
   }, []);
 
+  // get articles
   useEffect(() => {
     setLoading(true);
     services.getArticles(category, query).then((articles) => {
@@ -38,6 +51,27 @@ function App() {
       setLoading(false);
     });
   }, [category, query]);
+
+  // get latest articles
+  useEffect(() => {
+    services
+      .getLatestNews(pageSize, page)
+      .then((latestArticles) => setLatestNews(latestArticles));
+    setPage(2);
+  }, []);
+
+  // load more articles
+  const fetchMoreData = () => {
+    setTimeout(() => {
+      services
+        .getLatestNews(pageSize, page)
+        .then((latestArticles) => {
+          setLatestNews((prevState) => [...prevState, ...latestArticles]);
+        })
+        .catch((err) => setError(err));
+    }, 1500);
+    setPage((prevState) => prevState + 1);
+  };
 
   return (
     <div className="App">
@@ -77,7 +111,14 @@ function App() {
             </div>
           ) : (
             !isMenuOpen && (
-              <News articles={articles} sources={sources} category={category} />
+              <News
+                articles={articles}
+                sources={sources}
+                category={category}
+                fetchMoreData={fetchMoreData}
+                latestNews={latestNews}
+                error={error}
+              />
             )
           )}
         </div>

@@ -11,7 +11,14 @@ import Article from "./Article.jsx";
 //context
 import { GlobalContext } from "../../context/GlobalContext";
 
-const News = ({ articles, sources, category }) => {
+const News = ({
+  articles,
+  sources,
+  category,
+  fetchMoreData,
+  latestNews,
+  error,
+}) => {
   const { filteredArticles, notSmallViewport, featuredLatest } =
     useContext(GlobalContext);
 
@@ -37,7 +44,13 @@ const News = ({ articles, sources, category }) => {
             <Article article={article} category={category} sources={sources} />
           );
         })}
-        {notSmallViewport && <LatestNews />}
+        {notSmallViewport && (
+          <LatestNews
+            fetchMoreData={fetchMoreData}
+            latestNews={latestNews}
+            error={error}
+          />
+        )}
         {!notSmallViewport && featuredLatest === "latest" && <LatestNews />}
       </div>
     </div>
