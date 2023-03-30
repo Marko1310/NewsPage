@@ -45,11 +45,15 @@ function App() {
 
   // get articles
   useEffect(() => {
-    setLoading(true);
-    services.getArticles(category, query).then((articles) => {
-      setArticles(articles);
-      setLoading(false);
-    });
+    if (category !== "Favorites") {
+      setLoading(true);
+      services.getArticles(category, query).then((articles) => {
+        setArticles(articles);
+        setLoading(false);
+      });
+    } else if (category === "Favorites") {
+      setArticles(JSON.parse(localStorage.getItem("favoriteArticles")) || []);
+    }
   }, [category, query]);
 
   // get latest articles
