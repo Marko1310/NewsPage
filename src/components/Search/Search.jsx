@@ -10,7 +10,7 @@ import "./styles/Search.scss";
 // icons
 import menuLines from "../../../public/assets/icons/Three.svg";
 
-const Search = () => {
+const Search = ({ queryUpdate, query }) => {
   const { input, setInput } = useContext(GlobalContext);
   const { handleSearchSumbit, notSmallViewport, isMenuOpen, setIsMenuOpen } =
     useContext(GlobalContext);
@@ -29,15 +29,17 @@ const Search = () => {
       )}
       <div className={`search-container ${isMenuOpen ? "menu" : ""}`}>
         <form
-          onSubmit={(e) => handleSearchSumbit(e, input)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            queryUpdate(e.target.value);
+          }}
           className="search-form"
         >
           <input
-            onChange={(e) => setInput(e.target.value)}
             className="search-input"
             type="text"
             placeholder="Search news"
-            value={input}
+            // value={query}
           ></input>
           {notSmallViewport && (
             <button className="search-button" type="submit">

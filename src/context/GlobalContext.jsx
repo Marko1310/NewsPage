@@ -12,8 +12,8 @@ export const GlobalProvider = ({ children }) => {
   // const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
   // const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
   // const API_KEY = "03a53c477965493ab56337906674304e";
-  const API_KEY = "bde9b689a4584be0bd5757718405f691";
-  // const API_KEY = "f72818b798474a18b18661aea91ec437";
+  // const API_KEY = "bde9b689a4584be0bd5757718405f691";
+  const API_KEY = "f72818b798474a18b18661aea91ec437";
 
   // states //
   const [articles, setArticles] = useState([]);
@@ -78,13 +78,11 @@ export const GlobalProvider = ({ children }) => {
         `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&pageSize=40`
       );
       const allArticles = responseArticles.data.articles;
-      console.log(allArticles);
 
       const responseSources = await axios.get(
         `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}&pageSize=100`
       );
       const allSources = responseSources.data.sources;
-      console.log(allSources);
 
       const articlesWithCategory = [];
       allArticles.map((el) => {

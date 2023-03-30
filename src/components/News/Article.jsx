@@ -12,7 +12,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 // images
 import NoImage from "../../assets/images/No_Image.png";
 
-const Article = ({ article }) => {
+const Article = ({ article, sources, category }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { handleFavorite } = useContext(GlobalContext);
 
@@ -35,7 +35,11 @@ const Article = ({ article }) => {
         />
       </div>
       <div className="article-container">
-        <p className="article-category">{article.category}</p>
+        <p className="article-category">
+          {category === "Home"
+            ? sources?.find((s) => s.id === article.source.id)?.category
+            : category}
+        </p>
         <p className="article-title">{article.title}</p>
         <div className="author-favorite">
           {<p className="article-author">{article.author}</p>}

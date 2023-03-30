@@ -1,6 +1,7 @@
 // react
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import axios from "axios";
 
 // css
 import "./App.scss";
@@ -17,17 +18,63 @@ import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 import Menu from "./components/Menu/Menu";
 
 function App() {
-  const { loading, notSmallViewport, isMenuOpen } = useContext(GlobalContext);
+  const API_KEY = "f72818b798474a18b18661aea91ec437";
+
+  const { notSmallViewport, isMenuOpen } = useContext(GlobalContext);
+
+  const [category, setCategory] = useState("Home");
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [sources, setSources] = useState([]);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://newsapi.org/v2/top-headlines/sources?country=us&apiKey=${API_KEY}`
+      )
+      .then((data) => {
+        setSources(data.data.sources);
+      });
+  }, []);
+
+  useEffect(() => {
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+    if (category !== "Home") {
+      url += `&category=${category}`;
+    }
+
+    if (query) {
+      url += `&q=${query}`;
+    }
+    axios.get(url).then((data) => {
+      setArticles(data.data.articles);
+    });
+  }, [category, query]);
 
   return (
     <div className="App">
+      {category}
       {isMenuOpen && <Menu />}
       {notSmallViewport && <Navbar />}
       <div className="main-container">
-        {!isMenuOpen && <Search />}
+        {!isMenuOpen && (
+          <Search
+            queryUpdate={(q) => {
+              console.log(q);
+              setQuery(q);
+            }}
+            query={query}
+          />
+        )}
         {!isMenuOpen && !notSmallViewport && <FeaturedLatest />}
         <div className="grid-container">
-          {notSmallViewport && <Sidebar />}
+          {notSmallViewport && (
+            <Sidebar
+              category={category}
+              handleChangeCategory={(c) => setCategory(c)}
+            />
+          )}
           {loading ? (
             <div className="loading">
               <ThreeDots
@@ -43,7 +90,9 @@ function App() {
               <h2 className="loading-title">Loading</h2>
             </div>
           ) : (
-            !isMenuOpen && <News />
+            !isMenuOpen && (
+              <News articles={articles} sources={sources} category={category} />
+            )
           )}
         </div>
       </div>

@@ -10,9 +10,9 @@ import icons from "./icons";
 // Context
 import { GlobalContext } from "../../context/GlobalContext";
 
-const Sidebar = () => {
-  const { selectedCategory } = useContext(GlobalContext);
-  const { handleChangeCategory } = useContext(GlobalContext);
+const Sidebar = ({ category, handleChangeCategory }) => {
+  // const { category } = useContext(GlobalContext);
+  // const { handleChangeCategory } = useContext(GlobalContext);
 
   return (
     <div className="sidebar-container">
@@ -22,18 +22,16 @@ const Sidebar = () => {
             onClick={() => handleChangeCategory(el.title)}
             key={el.id}
             className={`icon-square + ${
-              selectedCategory === el.title ? "selected" : ""
+              category === el.title ? "selected" : ""
             }`}
           >
             <img
-              className={`icon-image + ${
-                selectedCategory === el.title ? "red" : ""
-              }`}
+              className={`icon-image + ${category === el.title ? "red" : ""}`}
               src={el.imgUrl}
             />
             <p
               className={`icon-title + ${
-                selectedCategory === el.title ? "redColour" : ""
+                category === el.title ? "redColour" : ""
               }`}
             >
               {el.title}
