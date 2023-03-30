@@ -43,7 +43,6 @@ const getLatestNews = function (pageSize, page) {
     .then((response) => {
       return response.data.articles;
     });
-  setPage(2);
 };
 
 export default {

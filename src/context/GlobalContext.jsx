@@ -24,19 +24,19 @@ export const GlobalProvider = ({ children }) => {
 
   // functions //
 
-  useEffect(() => {
-    getHomePageArticles().then((data) => {
-      const sortedArticles = [...data].sort((a, b) => {
-        const dateA = new Date(a.publishedAt);
-        const dateB = new Date(b.publishedAt);
-        return dateB - dateA;
-      });
-      setLoading(false);
-      setArticles(sortedArticles);
-    });
-    if (notSmallViewport) setIsMenuOpen(false);
-    if (notSmallViewport) setSelectedCategory("Home");
-  }, [notSmallViewport]);
+  // useEffect(() => {
+  //   getHomePageArticles().then((data) => {
+  //     const sortedArticles = [...data].sort((a, b) => {
+  //       const dateA = new Date(a.publishedAt);
+  //       const dateB = new Date(b.publishedAt);
+  //       return dateB - dateA;
+  //     });
+  //     setLoading(false);
+  //     setArticles(sortedArticles);
+  //   });
+  //   if (notSmallViewport) setIsMenuOpen(false);
+  //   if (notSmallViewport) setSelectedCategory("Home");
+  // }, [notSmallViewport]);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
