@@ -21,8 +21,9 @@ import Menu from "./components/Menu/Menu";
 
 function App() {
   // genereal state
-  const { notSmallViewport, isMenuOpen } = useContext(GlobalContext);
+  const { notSmallViewport } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // news state
   const [category, setCategory] = useState("Home");
@@ -63,6 +64,12 @@ function App() {
       .then((latestArticles) => setLatestNews(latestArticles));
     setPage(2);
   }, []);
+
+  // change states depending on window size
+  useEffect(() => {
+    if (notSmallViewport) setIsMenuOpen(false);
+    if (notSmallViewport) setCategory("Home");
+  }, [notSmallViewport]);
 
   // load more articles
   const fetchMoreData = () => {
@@ -110,11 +117,19 @@ function App() {
 
   return (
     <div className="App">
-      {isMenuOpen && <Menu />}
+      {isMenuOpen && (
+        <Menu
+          isMenuOpen={isMenuOpen}
+          category={category}
+          openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
+        />
+      )}
       {notSmallViewport && <Navbar />}
       <div className="main-container">
         {!isMenuOpen && (
           <Search
+            isMenuOpen={isMenuOpen}
+            openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
             queryUpdate={(q) => {
               setQuery(q);
             }}

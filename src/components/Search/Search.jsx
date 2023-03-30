@@ -10,10 +10,9 @@ import "./styles/Search.scss";
 // icons
 import menuLines from "../../../public/assets/icons/Three.svg";
 
-const Search = ({ queryUpdate, setQuery }) => {
+const Search = ({ queryUpdate, isMenuOpen, openCloseMenu }) => {
   const [input, setInput] = useState("");
-  const { handleSearchSumbit, notSmallViewport, isMenuOpen, setIsMenuOpen } =
-    useContext(GlobalContext);
+  const { notSmallViewport, setIsMenuOpen } = useContext(GlobalContext);
 
   return (
     <div className={`titleSearch-container ${isMenuOpen ? "menu" : ""}`}>
@@ -22,7 +21,7 @@ const Search = ({ queryUpdate, setQuery }) => {
       </p>
       {!notSmallViewport && !isMenuOpen && (
         <img
-          onClick={() => setIsMenuOpen((prevState) => !prevState)}
+          onClick={() => openCloseMenu(isMenuOpen)}
           className="menuIcons"
           src={menuLines}
         />

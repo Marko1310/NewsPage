@@ -1,6 +1,3 @@
-//react
-import React, { useContext } from "react";
-
 // css
 import "./styles/Menu.scss";
 
@@ -13,20 +10,19 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 import Search from "../Search/Search";
 
-const Menu = () => {
-  const { selectedCategory } = useContext(GlobalContext);
-  const { handleChangeCategory } = useContext(GlobalContext);
-  const { setIsMenuOpen } = useContext(GlobalContext);
+const Menu = ({ category, isMenuOpen, openCloseMenu }) => {
+  // const { selectedCategory } = useContext(GlobalContext);
+  // const { handleChangeCategory } = useContext(GlobalContext);
 
   return (
     <div className="menu-container">
       <img
-        onClick={() => setIsMenuOpen((prevState) => !prevState)}
+        onClick={() => openCloseMenu(isMenuOpen)}
         className="menuIcons"
         src={menuX}
       />
 
-      <Search />
+      <Search openCloseMenu={openCloseMenu} isMenuOpen={isMenuOpen} />
       <div className="menu-icon-container">
         {icons.map((el) => {
           return (
@@ -34,18 +30,18 @@ const Menu = () => {
               onClick={() => handleChangeCategory(el.title)}
               key={el.id}
               className={`menu-icon-square ${
-                selectedCategory === el.title ? "selected" : ""
+                category === el.title ? "selected" : ""
               }`}
             >
               <img
                 className={`menu-icon-image ${
-                  selectedCategory === el.title ? "red" : ""
+                  category === el.title ? "red" : ""
                 }`}
                 src={el.imgUrl}
               />
               <p
                 className={`menu-icon-title ${
-                  selectedCategory === el.title ? "redColour" : ""
+                  category === el.title ? "redColour" : ""
                 }`}
               >
                 {el.title}

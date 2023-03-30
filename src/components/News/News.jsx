@@ -26,10 +26,11 @@ const News = ({
     <div className="news-container">
       {notSmallViewport && <p className="news-title">News</p>}
       <div className="news-gridLayout">
-        {articles?.map((article) => {
+        {articles?.map((article, index) => {
           if (notSmallViewport) {
             return (
               <Article
+                key={index}
                 article={article}
                 category={category}
                 sources={sources}
