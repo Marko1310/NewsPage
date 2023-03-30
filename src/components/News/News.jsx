@@ -18,11 +18,9 @@ const News = ({
   fetchMoreData,
   latestNews,
   error,
+  handleFavorite,
 }) => {
-  const { filteredArticles, notSmallViewport, featuredLatest } =
-    useContext(GlobalContext);
-
-  // const articlesToRender = filteredArticles ? filteredArticles : articles;
+  const { notSmallViewport, featuredLatest } = useContext(GlobalContext);
 
   return (
     <div className="news-container">
@@ -35,13 +33,19 @@ const News = ({
                 article={article}
                 category={category}
                 sources={sources}
+                handleFavorite={handleFavorite}
               />
             );
           } else if (!notSmallViewport && featuredLatest !== "featured") {
             return null;
           }
           return (
-            <Article article={article} category={category} sources={sources} />
+            <Article
+              article={article}
+              category={category}
+              sources={sources}
+              handleFavorite={handleFavorite}
+            />
           );
         })}
         {notSmallViewport && (

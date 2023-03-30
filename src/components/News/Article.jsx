@@ -1,20 +1,16 @@
 // react
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // css
 import "./styles/Article.scss";
 import "./styles/News.scss";
 import "./styles/Scroll.scss";
 
-// context
-import { GlobalContext } from "../../context/GlobalContext";
-
 // images
 import NoImage from "../../assets/images/No_Image.png";
 
-const Article = ({ article, sources, category }) => {
+const Article = ({ article, sources, category, handleFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const { handleFavorite } = useContext(GlobalContext);
 
   useEffect(() => {
     const storedArticles =

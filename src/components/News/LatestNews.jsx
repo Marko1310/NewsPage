@@ -1,15 +1,6 @@
-//react
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-
 // components
 import EachLatestNews from "./EachLatestNews.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-
-//context
-import { GlobalContext } from "../../context/GlobalContext.jsx";
-
-// services
 
 const LatestNews = ({ fetchMoreData, latestNews, error }) => {
   return (

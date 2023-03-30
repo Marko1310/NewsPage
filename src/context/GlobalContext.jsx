@@ -8,16 +8,8 @@ export const GlobalContext = createContext();
 
 // provider component
 export const GlobalProvider = ({ children }) => {
-  // API key
-  const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
-  // const API_KEY = "eef268bd2bf14a57b498ce95b413d433";
-  // const API_KEY = "03a53c477965493ab56337906674304e";
-  // const API_KEY = "bde9b689a4584be0bd5757718405f691";
-  // const API_KEY = "f72818b798474a18b18661aea91ec437";
-
   // states //
   const [articles, setArticles] = useState([]);
-  const [filteredArticles, setFilteredArticles] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
@@ -27,6 +19,8 @@ export const GlobalProvider = ({ children }) => {
   // viewPorts
   const notSmallViewport = useMatchMedia("(min-width: 480px)");
   const notMediumViewport = useMatchMedia("(min-width: 768px)");
+
+  const API_KEY = "9d082cf8c343429da0f7ccde72fd72e5";
 
   // functions //
 
@@ -168,18 +162,6 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  const handleSearchSumbit = function (e, input) {
-    setLoading(true);
-    setIsMenuOpen(false);
-    e.preventDefault();
-
-    const filteredArticles = articles.filter((article) =>
-      article.title.toLowerCase().includes(input.toLowerCase())
-    );
-    setFilteredArticles(filteredArticles);
-    setLoading(false);
-  };
-
   const globalState = {
     articles,
     setArticles,
@@ -189,10 +171,8 @@ export const GlobalProvider = ({ children }) => {
     setLoading,
     handleChangeCategory,
     handleFavorite,
-    handleSearchSumbit,
     input,
     setInput,
-    filteredArticles,
     API_KEY,
     notSmallViewport,
     notMediumViewport,
