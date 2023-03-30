@@ -110,15 +110,29 @@
   }
 
   .search-container {
+    &.menu {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .menu {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    // margin-left: 16px;
-    // margin-right: 16px;
-    // padding-left: 16px;
-    // padding-right: 16px;
-    // margin-right: auto;
-    margin-top: 73px;
-    margin-bottom: 28px;
+    align-items: center;
+  }
+
+  .center {
+    position: initial;
+    margin: 111px 0 64px 0;
+    width: 139px;
+    height: 39px;
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
   }
 }

@@ -9,13 +9,14 @@ import "./styles/Search.scss";
 
 const Search = () => {
   const { input, setInput } = useContext(GlobalContext);
-  const { handleSearchSumbit, notSmallViewport } = useContext(GlobalContext);
+  const { handleSearchSumbit, notSmallViewport, menu } =
+    useContext(GlobalContext);
   return (
-    <div className="titleSearch-container">
-      <p className="title">
+    <div className={`titleSearch-container ${menu ? "menu" : ""}`}>
+      <p className={`title ${menu ? "center" : ""}`}>
         <span>My</span>News
       </p>
-      <div className="search-container">
+      <div className={`search-container ${menu ? "menu" : ""}`}>
         <form
           onSubmit={(e) => handleSearchSumbit(e, input)}
           className="search-form"

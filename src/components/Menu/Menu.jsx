@@ -25,18 +25,18 @@ const Menu = () => {
             <div
               onClick={() => handleChangeCategory(el.title)}
               key={el.id}
-              className={`menu-icon-square + ${
+              className={`menu-icon-square ${
                 selectedCategory === el.title ? "selected" : ""
               }`}
             >
               <img
-                className={`menu-icon-image + ${
+                className={`menu-icon-image ${
                   selectedCategory === el.title ? "red" : ""
                 }`}
                 src={el.imgUrl}
               />
               <p
-                className={`menu-icon-title + ${
+                className={`menu-icon-title ${
                   selectedCategory === el.title ? "redColour" : ""
                 }`}
               >
