@@ -10,11 +10,12 @@ const getSources = function () {
     .then((data) => {
       console.log(data.data.sources);
       return data.data.sources;
-    });
+    })
+    .catch((err) => console.log(err));
 };
 
 const getArticles = function (category, query) {
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+  let url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=13&apiKey=${API_KEY}`;
 
   if (category !== "Home") {
     url += `&category=${category}`;
@@ -23,9 +24,12 @@ const getArticles = function (category, query) {
   if (query) {
     url += `&q=${query}`;
   }
-  return axios.get(url).then((data) => {
-    return data.data.articles;
-  });
+  return axios
+    .get(url)
+    .then((data) => {
+      return data.data.articles;
+    })
+    .catch((err) => console.log(err));
 };
 
 export default {

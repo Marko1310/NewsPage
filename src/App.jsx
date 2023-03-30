@@ -1,7 +1,6 @@
 // react
 import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import axios from "axios";
 
 // css
 import "./App.scss";
@@ -9,6 +8,7 @@ import "./App.scss";
 // context
 import { GlobalContext } from "./context/GlobalContext";
 
+// fetch calls
 import services from "./services/service.js";
 
 // components
@@ -20,10 +20,7 @@ import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 import Menu from "./components/Menu/Menu";
 
 function App() {
-  const API_KEY = "f72818b798474a18b18661aea91ec437";
-
   const { notSmallViewport, isMenuOpen } = useContext(GlobalContext);
-
   const [category, setCategory] = useState("Home");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,8 +32,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     services.getArticles(category, query).then((articles) => {
       setArticles(articles);
+      setLoading(false);
     });
   }, [category, query]);
 
