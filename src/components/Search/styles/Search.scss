@@ -110,6 +110,11 @@
   }
 
   .search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 73px;
+    margin-bottom: 28px;
     &.menu {
       margin: 0;
       width: 100%;
@@ -134,5 +139,13 @@
     font-weight: 900;
     font-size: 32px;
     line-height: 39px;
+  }
+
+  .menuIcons {
+    position: absolute;
+    width: 24px;
+    height: 20px;
+    right: 16px;
+    top: 29px;
   }
 }

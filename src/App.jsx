@@ -25,7 +25,7 @@ function App() {
       {notSmallViewport && <Navbar />}
       <div className="main-container">
         {!menu && <Search />}
-        {!menu && <FeaturedLatest />}
+        {!menu && !notSmallViewport && <FeaturedLatest />}
         <div className="grid-container">
           {notSmallViewport && <Sidebar />}
           {loading ? (

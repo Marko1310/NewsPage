@@ -40,8 +40,8 @@ export const GlobalProvider = ({ children }) => {
       setLoading(false);
       setArticles(sortedArticles);
     });
-    return () => {};
-  }, []);
+    if (notSmallViewport) setMenu(false);
+  }, [notSmallViewport]);
 
   // function to fetch by categorie:
   async function getArticlesByCategory(category) {
@@ -108,6 +108,8 @@ export const GlobalProvider = ({ children }) => {
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
+    if (menu) setMenu(false);
+
     setInput("");
 
     if (category === "Favorites") {
@@ -167,6 +169,7 @@ export const GlobalProvider = ({ children }) => {
 
   const handleSearchSumbit = function (e, input) {
     setLoading(true);
+    setMenu(false);
     e.preventDefault();
 
     const filteredArticles = articles.filter((article) =>
