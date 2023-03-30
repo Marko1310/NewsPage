@@ -22,7 +22,7 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [featuredLatest, setFeaturedLatest] = useState("featured");
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // viewPorts
   const notSmallViewport = useMatchMedia("(min-width: 480px)");
@@ -31,8 +31,8 @@ export const GlobalProvider = ({ children }) => {
   // functions //
 
   useEffect(() => {
-    getHomePageArticles().then((articles) => {
-      const sortedArticles = [...articles].sort((a, b) => {
+    getHomePageArticles().then((data) => {
+      const sortedArticles = [...data].sort((a, b) => {
         const dateA = new Date(a.publishedAt);
         const dateB = new Date(b.publishedAt);
         return dateB - dateA;
@@ -41,6 +41,7 @@ export const GlobalProvider = ({ children }) => {
       setArticles(sortedArticles);
     });
     if (notSmallViewport) setIsMenuOpen(false);
+    if (notSmallViewport) setSelectedCategory("Home");
   }, [notSmallViewport]);
 
   // function to fetch by categorie:
@@ -108,6 +109,8 @@ export const GlobalProvider = ({ children }) => {
   // change sidebar category and fetch category news and sort them
   const handleChangeCategory = function (category) {
     setSelectedCategory(category);
+    setFeaturedLatest("featured");
+
     if (isMenuOpen) setIsMenuOpen(false);
 
     setInput("");
@@ -117,8 +120,8 @@ export const GlobalProvider = ({ children }) => {
         JSON.parse(localStorage.getItem("favoriteArticles")) || [];
       setArticles(storedArticles);
     } else if (category === "Home") {
-      getHomePageArticles().then((articles) => {
-        const sortedArticles = [...articles].sort((a, b) => {
+      getHomePageArticles().then((data) => {
+        const sortedArticles = [...data].sort((a, b) => {
           const dateA = new Date(a.publishedAt);
           const dateB = new Date(b.publishedAt);
           return dateB - dateA;
@@ -126,8 +129,8 @@ export const GlobalProvider = ({ children }) => {
         setArticles(sortedArticles);
       });
     } else {
-      getArticlesByCategory(category).then((articles) => {
-        const sortedArticles = [...articles].sort((a, b) => {
+      getArticlesByCategory(category).then((data) => {
+        const sortedArticles = [...data].sort((a, b) => {
           const dateA = new Date(a.publishedAt);
           const dateB = new Date(b.publishedAt);
           return dateB - dateA;
