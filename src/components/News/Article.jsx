@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 
 // css
-import "./styles/Article.scss";
-import "./styles/News.scss";
-import "./styles/Scroll.scss";
+import "./Article.scss";
+import "./News.scss";
 
 // images
 import NoImage from "../../assets/images/No_Image.png";

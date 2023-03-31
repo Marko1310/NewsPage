@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 // css
-import "./styles/Search.scss";
+import "./Search.scss";
 
 // icons
 import menuLines from "../../../public/assets/icons/Three.svg";

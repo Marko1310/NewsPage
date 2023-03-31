@@ -2,6 +2,9 @@
 import EachLatestNews from "./EachLatestNews.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+//css
+import "./LatestNews.scss";
+
 const LatestNews = ({ fetchMoreData, latestNews, error }) => {
   return (
     <div className="latestNews-container">

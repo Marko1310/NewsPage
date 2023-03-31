@@ -1,5 +1,5 @@
 // css
-import "./styles/Navbar.scss";
+import "./Navbar.scss";
 
 // context
 import { useContext } from "react";

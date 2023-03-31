@@ -1,5 +1,5 @@
 // css
-import "./styles/Menu.scss";
+import "./Menu.scss";
 
 // icons
 import icons from "./icons";

@@ -2,13 +2,10 @@
 import React, { useContext } from "react";
 
 // css
-import "./styles/Sidebar.scss";
+import "./Sidebar.scss";
 
 // icons
 import icons from "./icons";
-
-// Context
-import { GlobalContext } from "../../context/GlobalContext";
 
 const Sidebar = ({ category, handleChangeCategory }) => {
   // const { category } = useContext(GlobalContext);

@@ -1,5 +1,5 @@
 //css
-import "./Styles/FeaturedLatest.scss";
+import "./FeaturedLatest.scss";
 
 //context
 import { useContext } from "react";

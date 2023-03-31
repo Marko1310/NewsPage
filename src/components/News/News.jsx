@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // css
-import "./styles/News.scss";
+import "./News.scss";
 
 // components
 import LatestNews from "./LatestNews.jsx";
