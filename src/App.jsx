@@ -129,6 +129,10 @@ function App() {
         <Menu
           isMenuOpen={isMenuOpen}
           category={category}
+          handleChangeCategory={(c) => {
+            setCategory(c);
+            setIsMenuOpen(false);
+          }}
           openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
         />
       )}

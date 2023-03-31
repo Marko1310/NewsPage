@@ -10,7 +10,12 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 import Search from "../Search/Search";
 
-const Menu = ({ category, isMenuOpen, openCloseMenu }) => {
+const Menu = ({
+  category,
+  isMenuOpen,
+  openCloseMenu,
+  handleChangeCategory,
+}) => {
   // const { selectedCategory } = useContext(GlobalContext);
   // const { handleChangeCategory } = useContext(GlobalContext);
 
