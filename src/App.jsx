@@ -30,6 +30,7 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [sources, setSources] = useState([]);
   const [query, setQuery] = useState("");
+  const [input, setInput] = useState("");
 
   // latest news state
   const [latestNews, setLatestNews] = useState([]);
@@ -131,9 +132,18 @@ function App() {
           category={category}
           handleChangeCategory={(c) => {
             setCategory(c);
+            setQuery("");
             setIsMenuOpen(false);
           }}
           openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
+          input={input}
+          changeInput={(i) => {
+            setInput(i);
+          }}
+          queryUpdate={(q) => {
+            setQuery(q);
+            setInput("");
+          }}
         />
       )}
       {notSmallViewport && <Navbar />}
@@ -141,11 +151,15 @@ function App() {
         {!isMenuOpen && (
           <Search
             isMenuOpen={isMenuOpen}
+            input={input}
+            changeInput={(i) => {
+              setInput(i);
+            }}
             openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
             queryUpdate={(q) => {
               setQuery(q);
+              setInput("");
             }}
-            query={query}
           />
         )}
         {!isMenuOpen && !notSmallViewport && (
@@ -158,7 +172,10 @@ function App() {
           {notSmallViewport && (
             <Sidebar
               category={category}
-              handleChangeCategory={(c) => setCategory(c)}
+              handleChangeCategory={(c) => {
+                setQuery("");
+                setCategory(c);
+              }}
             />
           )}
           {loading ? (

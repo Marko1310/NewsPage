@@ -1,5 +1,5 @@
 // react
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 // context
 import { GlobalContext } from "../../context/GlobalContext";
@@ -10,9 +10,14 @@ import "./Search.scss";
 // icons
 import menuLines from "../../../public/assets/icons/Three.svg";
 
-const Search = ({ queryUpdate, isMenuOpen, openCloseMenu }) => {
-  const [input, setInput] = useState("");
-  const { notSmallViewport, setIsMenuOpen } = useContext(GlobalContext);
+const Search = ({
+  queryUpdate,
+  isMenuOpen,
+  openCloseMenu,
+  input,
+  changeInput,
+}) => {
+  const { notSmallViewport } = useContext(GlobalContext);
 
   return (
     <div className={`titleSearch-container ${isMenuOpen ? "menu" : ""}`}>
@@ -31,12 +36,13 @@ const Search = ({ queryUpdate, isMenuOpen, openCloseMenu }) => {
           onSubmit={(e) => {
             e.preventDefault();
             queryUpdate(input);
+            openCloseMenu(true);
           }}
           className="search-form"
         >
           <input
             onChange={(e) => {
-              setInput(e.target.value);
+              changeInput(e.target.value);
             }}
             className="search-input"
             type="text"

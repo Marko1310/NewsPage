@@ -5,9 +5,6 @@ import "./Menu.scss";
 import icons from "./icons";
 import menuX from "../../../public/assets/icons/X.svg";
 
-// Context
-import { GlobalContext } from "../../context/GlobalContext";
-
 import Search from "../Search/Search";
 
 const Menu = ({
@@ -15,10 +12,10 @@ const Menu = ({
   isMenuOpen,
   openCloseMenu,
   handleChangeCategory,
+  input,
+  changeInput,
+  queryUpdate,
 }) => {
-  // const { selectedCategory } = useContext(GlobalContext);
-  // const { handleChangeCategory } = useContext(GlobalContext);
-
   return (
     <div className="menu-container">
       <img
@@ -27,7 +24,13 @@ const Menu = ({
         src={menuX}
       />
 
-      <Search openCloseMenu={openCloseMenu} isMenuOpen={isMenuOpen} />
+      <Search
+        openCloseMenu={openCloseMenu}
+        isMenuOpen={isMenuOpen}
+        input={input}
+        changeInput={changeInput}
+        queryUpdate={queryUpdate}
+      />
       <div className="menu-icon-container">
         {icons.map((el) => {
           return (
