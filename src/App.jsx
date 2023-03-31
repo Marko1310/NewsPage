@@ -88,37 +88,6 @@ function App() {
     setPage((prevState) => prevState + 1);
   };
 
-  // // handle favorite articles
-  // const handleFavorite = function (article) {
-  //   const storedArticles =
-  //     JSON.parse(localStorage.getItem("favoriteArticles")) || [];
-
-  //   if (storedArticles.length === 0) {
-  //     localStorage.setItem("favoriteArticles", JSON.stringify([article]));
-  //   } else {
-  //     const articleExist = storedArticles.find(
-  //       (storedArticle) =>
-  //         storedArticle.url === article.url &&
-  //         storedArticle.category === article.category
-  //     );
-  //     if (!articleExist) {
-  //       storedArticles.push(article);
-  //       localStorage.setItem(
-  //         "favoriteArticles",
-  //         JSON.stringify(storedArticles)
-  //       );
-  //     } else {
-  //       const newArticleArray = storedArticles.filter(
-  //         (el) => el.content !== articleExist.content
-  //       );
-  //       localStorage.setItem(
-  //         "favoriteArticles",
-  //         JSON.stringify(newArticleArray)
-  //       );
-  //     }
-  //   }
-  // };
-
   // handle favorite articles
   const handleFavorite = function (article) {
     const storedArticles = localStorageServices.getFavorites();

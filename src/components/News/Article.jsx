@@ -8,14 +8,17 @@ import "./News.scss";
 // images
 import NoImage from "../../assets/images/No_Image.png";
 
+// fetch calls
+import localStorageServices from "../../services/localStorageServices.js";
+
 const Article = ({ article, category, sources, handleFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    const storedArticles =
-      JSON.parse(localStorage.getItem("favoriteArticles")) || [];
-    const isStoredArticle = storedArticles.find(
-      (storedArticle) => storedArticle.url === article.url
+    const storedArticles = localStorageServices.getFavorites();
+    const isStoredArticle = localStorageServices.isFavorite(
+      storedArticles,
+      article
     );
     if (isStoredArticle) setIsFavorite(true);
     else if (isStoredArticle === undefined) setIsFavorite(false);
