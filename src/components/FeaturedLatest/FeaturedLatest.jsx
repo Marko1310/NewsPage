@@ -12,7 +12,7 @@ const FeaturedLatest = ({ featuredLatest, toggleFeaturedLatest }) => {
       <button
         onClick={() => toggleFeaturedLatest("featured")}
         className={`featuredLatest-container-button + ${
-          featuredLatest === "featured" ? "selectedButton" : ""
+          featuredLatest === "featured" ? "featured" : ""
         }`}
       >
         Featured
@@ -20,7 +20,7 @@ const FeaturedLatest = ({ featuredLatest, toggleFeaturedLatest }) => {
       <button
         onClick={() => toggleFeaturedLatest("latest")}
         className={`featuredLatest-container-button + ${
-          featuredLatest === "latest" ? "selectedButton" : ""
+          featuredLatest === "latest" ? "latest" : ""
         }`}
       >
         Latest

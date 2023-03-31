@@ -7,13 +7,12 @@
 }
 
 .featuredLatest-container-button {
-  margin: 0 5px;
+  margin: 0 10px;
   font-weight: $InterV;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: -0.0246154px;
-  width: 81px;
   height: 40px;
   background: none;
   border: #1d1d1b;
@@ -21,9 +20,18 @@
   padding: 0;
 }
 
-.selectedButton {
+.featured {
   color: #bb1e1e;
   background: rgba(187, 30, 30, 0.1);
   border-radius: 20px;
   border-width: 0;
+  width: 101px;
+}
+
+.latest {
+  color: #bb1e1e;
+  background: rgba(187, 30, 30, 0.1);
+  border-radius: 20px;
+  border-width: 0;
+  width: 81px;
 }
