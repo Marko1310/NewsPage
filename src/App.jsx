@@ -128,6 +128,7 @@ function App() {
             setCategory(c);
             setQuery("");
             setIsMenuOpen(false);
+            setFeaturedLatest("featured");
           }}
           openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
           input={input}
