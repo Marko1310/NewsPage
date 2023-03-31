@@ -19,8 +19,9 @@ const News = ({
   latestNews,
   error,
   handleFavorite,
+  featuredLatest,
 }) => {
-  const { notSmallViewport, featuredLatest } = useContext(GlobalContext);
+  const { notSmallViewport } = useContext(GlobalContext);
 
   return (
     <div className="news-container">
@@ -42,6 +43,7 @@ const News = ({
           }
           return (
             <Article
+              key={index}
               article={article}
               category={category}
               sources={sources}
@@ -56,7 +58,13 @@ const News = ({
             error={error}
           />
         )}
-        {!notSmallViewport && featuredLatest === "latest" && <LatestNews />}
+        {!notSmallViewport && featuredLatest === "latest" && (
+          <LatestNews
+            fetchMoreData={fetchMoreData}
+            latestNews={latestNews}
+            error={error}
+          />
+        )}
       </div>
     </div>
   );

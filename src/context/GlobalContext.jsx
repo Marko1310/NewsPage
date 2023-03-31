@@ -13,7 +13,7 @@ export const GlobalProvider = ({ children }) => {
   // const [selectedCategory, setSelectedCategory] = useState("Home");
   // const [loading, setLoading] = useState(false);
   // const [input, setInput] = useState("");
-  const [featuredLatest, setFeaturedLatest] = useState("featured");
+  // const [featuredLatest, setFeaturedLatest] = useState("featured");
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // viewPorts
@@ -165,8 +165,8 @@ export const GlobalProvider = ({ children }) => {
     // API_KEY,
     notSmallViewport,
     notMediumViewport,
-    featuredLatest,
-    setFeaturedLatest,
+    // featuredLatest,
+    // setFeaturedLatest,
     // isMenuOpen,
     // setIsMenuOpen,
   };

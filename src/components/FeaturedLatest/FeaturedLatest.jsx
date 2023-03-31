@@ -5,12 +5,12 @@ import "./FeaturedLatest.scss";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
-const FeaturedLatest = () => {
-  const { featuredLatest, setFeaturedLatest } = useContext(GlobalContext);
+const FeaturedLatest = ({ featuredLatest, toggleFeaturedLatest }) => {
+  const { setFeaturedLatest } = useContext(GlobalContext);
   return (
     <div className="featuredLatest-container">
       <button
-        onClick={() => setFeaturedLatest("featured")}
+        onClick={() => toggleFeaturedLatest("featured")}
         className={`featuredLatest-container-button + ${
           featuredLatest === "featured" ? "selectedButton" : ""
         }`}
@@ -18,7 +18,7 @@ const FeaturedLatest = () => {
         Featured
       </button>
       <button
-        onClick={() => setFeaturedLatest("latest")}
+        onClick={() => toggleFeaturedLatest("latest")}
         className={`featuredLatest-container-button + ${
           featuredLatest === "latest" ? "selectedButton" : ""
         }`}

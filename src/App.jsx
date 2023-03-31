@@ -37,6 +37,9 @@ function App() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
 
+  // state for featured/latest button
+  const [featuredLatest, setFeaturedLatest] = useState("featured");
+
   // functions//
 
   // get sources
@@ -115,6 +118,11 @@ function App() {
     }
   };
 
+  // toggle Featured/Latest news
+  const toggleFeaturedLatest = function (selectedNews) {
+    setFeaturedLatest(selectedNews);
+  };
+
   return (
     <div className="App">
       {isMenuOpen && (
@@ -136,7 +144,12 @@ function App() {
             query={query}
           />
         )}
-        {!isMenuOpen && !notSmallViewport && <FeaturedLatest />}
+        {!isMenuOpen && !notSmallViewport && (
+          <FeaturedLatest
+            featuredLatest={featuredLatest}
+            toggleFeaturedLatest={toggleFeaturedLatest}
+          />
+        )}
         <div className="grid-container">
           {notSmallViewport && (
             <Sidebar
@@ -168,6 +181,7 @@ function App() {
                 latestNews={latestNews}
                 error={error}
                 handleFavorite={handleFavorite}
+                featuredLatest={featuredLatest}
               />
             )
           )}
