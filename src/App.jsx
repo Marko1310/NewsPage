@@ -9,7 +9,8 @@ import "./App.scss";
 import { GlobalContext } from "./context/GlobalContext";
 
 // fetch calls
-import services from "./services/service.js";
+import newsApiServices from "./services/newsApiServices.js";
+import localStorageServices from "./services/localStorageServices.js";
 
 // components
 import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
@@ -45,14 +46,14 @@ function App() {
 
   // get sources
   useEffect(() => {
-    services.getSources().then((sources) => setSources(sources));
+    newsApiServices.getSources().then((sources) => setSources(sources));
   }, []);
 
   // get articles
   useEffect(() => {
     if (category !== "Favorites") {
       setLoading(true);
-      services.getArticles(category, query).then((articles) => {
+      newsApiServices.getArticles(category, query).then((articles) => {
         setArticles(articles);
         setLoading(false);
       });
@@ -63,7 +64,7 @@ function App() {
 
   // get latest articles
   useEffect(() => {
-    services
+    newsApiServices
       .getLatestNews(pageSize, page)
       .then((latestArticles) => setLatestNews(latestArticles));
     setPage(2);
@@ -77,7 +78,7 @@ function App() {
   // load more articles
   const fetchMoreData = () => {
     setTimeout(() => {
-      services
+      newsApiServices
         .getLatestNews(pageSize, page)
         .then((latestArticles) => {
           setLatestNews((prevState) => [...prevState, ...latestArticles]);
@@ -87,33 +88,57 @@ function App() {
     setPage((prevState) => prevState + 1);
   };
 
+  // // handle favorite articles
+  // const handleFavorite = function (article) {
+  //   const storedArticles =
+  //     JSON.parse(localStorage.getItem("favoriteArticles")) || [];
+
+  //   if (storedArticles.length === 0) {
+  //     localStorage.setItem("favoriteArticles", JSON.stringify([article]));
+  //   } else {
+  //     const articleExist = storedArticles.find(
+  //       (storedArticle) =>
+  //         storedArticle.url === article.url &&
+  //         storedArticle.category === article.category
+  //     );
+  //     if (!articleExist) {
+  //       storedArticles.push(article);
+  //       localStorage.setItem(
+  //         "favoriteArticles",
+  //         JSON.stringify(storedArticles)
+  //       );
+  //     } else {
+  //       const newArticleArray = storedArticles.filter(
+  //         (el) => el.content !== articleExist.content
+  //       );
+  //       localStorage.setItem(
+  //         "favoriteArticles",
+  //         JSON.stringify(newArticleArray)
+  //       );
+  //     }
+  //   }
+  // };
+
   // handle favorite articles
   const handleFavorite = function (article) {
-    const storedArticles =
-      JSON.parse(localStorage.getItem("favoriteArticles")) || [];
+    const storedArticles = localStorageServices.getFavorites();
 
     if (storedArticles.length === 0) {
-      localStorage.setItem("favoriteArticles", JSON.stringify([article]));
+      localStorageServices.setFavorite(article);
     } else {
-      const articleExist = storedArticles.find(
-        (storedArticle) =>
-          storedArticle.url === article.url &&
-          storedArticle.category === article.category
+      const articleExist = localStorageServices.isFavorite(
+        storedArticles,
+        article
       );
       if (!articleExist) {
         storedArticles.push(article);
-        localStorage.setItem(
-          "favoriteArticles",
-          JSON.stringify(storedArticles)
-        );
+        localStorageServices.setFavorite(storedArticles);
       } else {
-        const newArticleArray = storedArticles.filter(
-          (el) => el.content !== articleExist.content
+        const newArticleArray = localStorageServices.removeFavorite(
+          storedArticles,
+          articleExist
         );
-        localStorage.setItem(
-          "favoriteArticles",
-          JSON.stringify(newArticleArray)
-        );
+        localStorageServices.setFavorite(newArticleArray);
       }
     }
   };
