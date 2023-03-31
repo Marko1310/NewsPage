@@ -8,7 +8,7 @@ import "./News.scss";
 // images
 import NoImage from "../../assets/images/No_Image.png";
 
-const Article = ({ article, sources, category, handleFavorite }) => {
+const Article = ({ article, category, sources, handleFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {

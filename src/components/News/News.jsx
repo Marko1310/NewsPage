@@ -38,18 +38,19 @@ const News = ({
                 handleFavorite={handleFavorite}
               />
             );
+          } else if (!notSmallViewport && featuredLatest === "featured") {
+            return (
+              <Article
+                key={index}
+                article={article}
+                category={category}
+                sources={sources}
+                handleFavorite={handleFavorite}
+              />
+            );
           } else if (!notSmallViewport && featuredLatest !== "featured") {
             return null;
           }
-          return (
-            <Article
-              key={index}
-              article={article}
-              category={category}
-              sources={sources}
-              handleFavorite={handleFavorite}
-            />
-          );
         })}
         {notSmallViewport && (
           <LatestNews
