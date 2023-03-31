@@ -1,5 +1,5 @@
 //react
-import React, { useContext } from "react";
+import React from "react";
 
 // css
 import "./Sidebar.scss";
@@ -8,9 +8,6 @@ import "./Sidebar.scss";
 import icons from "./icons";
 
 const Sidebar = ({ category, handleChangeCategory }) => {
-  // const { category } = useContext(GlobalContext);
-  // const { handleChangeCategory } = useContext(GlobalContext);
-
   return (
     <div className="sidebar-container">
       {icons.map((el) => {

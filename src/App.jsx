@@ -12,12 +12,12 @@ import { GlobalContext } from "./context/GlobalContext";
 import services from "./services/service.js";
 
 // components
-import Navbar from "./components/Navbar/Navbar";
-import Search from "./components/Search/Search";
-import Sidebar from "./components/Sidebar/Sidebar";
-import News from "./components/News/News";
 import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
 import Menu from "./components/Menu/Menu";
+import Navbar from "./components/Navbar/Navbar";
+import News from "./components/News/News";
+import Search from "./components/Search/Search";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   // genereal state
@@ -72,7 +72,6 @@ function App() {
   // change states depending on window size
   useEffect(() => {
     if (notSmallViewport) setIsMenuOpen(false);
-    if (notSmallViewport) setCategory("Home");
   }, [notSmallViewport]);
 
   // load more articles
@@ -119,17 +118,12 @@ function App() {
     }
   };
 
-  // toggle Featured/Latest news
-  const toggleFeaturedLatest = function (selectedNews) {
-    setFeaturedLatest(selectedNews);
-  };
-
   return (
     <div className="App">
       {isMenuOpen && (
         <Menu
-          isMenuOpen={isMenuOpen}
           category={category}
+          isMenuOpen={isMenuOpen}
           handleChangeCategory={(c) => {
             setCategory(c);
             setQuery("");
@@ -165,7 +159,10 @@ function App() {
         {!isMenuOpen && !notSmallViewport && (
           <FeaturedLatest
             featuredLatest={featuredLatest}
-            toggleFeaturedLatest={toggleFeaturedLatest}
+            toggleFeaturedLatest={(selectedNews) => {
+              setQuery("");
+              setFeaturedLatest(selectedNews);
+            }}
           />
         )}
         <div className="grid-container">

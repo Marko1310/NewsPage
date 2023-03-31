@@ -11,11 +11,11 @@ import "./Search.scss";
 import menuLines from "../../../public/assets/icons/Three.svg";
 
 const Search = ({
-  queryUpdate,
-  isMenuOpen,
   openCloseMenu,
   input,
   changeInput,
+  isMenuOpen,
+  queryUpdate,
 }) => {
   const { notSmallViewport } = useContext(GlobalContext);
 

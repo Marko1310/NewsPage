@@ -10,8 +10,8 @@ import Search from "../Search/Search";
 const Menu = ({
   category,
   isMenuOpen,
-  openCloseMenu,
   handleChangeCategory,
+  openCloseMenu,
   input,
   changeInput,
   queryUpdate,
