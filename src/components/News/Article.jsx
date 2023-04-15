@@ -38,7 +38,7 @@ const Article = ({ article, category, sources, handleFavorite }) => {
             ? sources?.find((s) => s.id === article.source.id)?.category
             : category}
         </p>
-        <p className="article-title">{article.title}</p>
+        <a className="article-title" href={article.url}>{article.title}</a>
         <div className="author-favorite">
           {<p className="article-author">{article.author}</p>}
           <i
