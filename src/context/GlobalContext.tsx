@@ -1,25 +1,27 @@
-import React, { createContext } from "react";
+import React, { createContext } from 'react';
 
 // npm libraries
-import useMatchMedia from "react-use-match-media";
+// @ts-ignore
+import useMatchMedia from 'react-use-match-media';
+
+type GlobalContextType = {
+  notSmallViewport: boolean;
+  notMediumViewport: boolean;
+};
 
 // create Context
-export const GlobalContext = createContext();
+export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 // provider component
-export const GlobalProvider = ({ children }) => {
+export const GlobalProvider = (props: React.PropsWithChildren<{}>) => {
   // viewPorts
-  const notSmallViewport = useMatchMedia("(min-width: 480px)");
-  const notMediumViewport = useMatchMedia("(min-width: 768px)");
+  const notSmallViewport: boolean = useMatchMedia('(min-width: 480px)');
+  const notMediumViewport: boolean = useMatchMedia('(min-width: 768px)');
 
   const globalState = {
     notSmallViewport,
     notMediumViewport,
   };
 
-  return (
-    <GlobalContext.Provider value={globalState}>
-      {children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={globalState}>{props.children}</GlobalContext.Provider>;
 };

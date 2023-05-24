@@ -1,20 +1,22 @@
 // react
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
 //components
-import App from "./App";
+import App from './App';
 
 //css
-import "./index.scss";
+import './index.scss';
 
 // context
-import { GlobalProvider } from "./context/GlobalContext";
+import { GlobalProvider } from './context/GlobalContext';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = ReactDOM.createRoot(document.getElementById('root') as Element);
+
+root.render(
   <React.StrictMode>
     <GlobalProvider>
       <App />
     </GlobalProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
