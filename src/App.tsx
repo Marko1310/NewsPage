@@ -20,6 +20,17 @@ import News from './components/News/News';
 import Search from './components/Search/Search';
 import Sidebar from './components/Sidebar/Sidebar';
 
+interface Article {
+  author: string | null;
+  content: string | null;
+  description: string;
+  publishedAt: string;
+  source: { id: string | null; name: string };
+  title: string;
+  url: string;
+  urlToImage: string;
+}
+
 function App() {
   //context
   const context = useContext(GlobalContext);
@@ -34,7 +45,7 @@ function App() {
   const [category, setCategory] = useState<string>('Home');
 
   //DEFINE!!!//
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [sources, setSources] = useState([]);
   //DEFINE!!!//
 
@@ -99,7 +110,7 @@ function App() {
   };
 
   // handle favorite articles
-  const handleFavorite = function (article) {
+  const handleFavorite = function (article: Article) {
     const storedArticles = localStorageServices.getFavorites();
 
     if (storedArticles.length === 0) {
@@ -128,12 +139,12 @@ function App() {
             setIsMenuOpen(false);
             setFeaturedLatest('featured');
           }}
-          openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
+          openCloseMenu={(prevState: boolean) => setIsMenuOpen(!prevState)}
           input={input}
-          changeInput={(i) => {
+          changeInput={(i: string) => {
             setInput(i);
           }}
-          queryUpdate={(q) => {
+          queryUpdate={(q: string) => {
             setQuery(q);
             setInput('');
           }}
@@ -145,11 +156,11 @@ function App() {
           <Search
             isMenuOpen={isMenuOpen}
             input={input}
-            changeInput={(i) => {
+            changeInput={(i: string) => {
               setInput(i);
             }}
             openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
-            queryUpdate={(q) => {
+            queryUpdate={(q: string) => {
               setQuery(q);
               setInput('');
             }}
@@ -168,7 +179,7 @@ function App() {
           {notSmallViewport && (
             <Sidebar
               category={category}
-              handleChangeCategory={(c) => {
+              handleChangeCategory={(c: string) => {
                 setQuery('');
                 setCategory(c);
               }}
@@ -183,7 +194,7 @@ function App() {
                 color="#1d1d1b"
                 ariaLabel="three-dots-loading"
                 wrapperStyle={{}}
-                wrapperClassName=""
+                wrapperClass=""
                 visible={true}
               />
               <h2 className="loading-title">Loading</h2>
