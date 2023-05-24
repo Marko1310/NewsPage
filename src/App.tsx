@@ -1,46 +1,56 @@
 // react
-import { useContext, useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
+import React, { useContext, useEffect, useState } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 
 // css
-import "./App.scss";
+import './App.scss';
 
 // context
-import { GlobalContext } from "./context/GlobalContext";
+import { GlobalContext } from './context/GlobalContext';
 
 // fetch calls
-import newsApiServices from "./services/newsApiServices.js";
-import localStorageServices from "./services/localStorageServices.js";
+import newsApiServices from './services/newsApiServices.js';
+import localStorageServices from './services/localStorageServices.js';
 
 // components
-import FeaturedLatest from "./components/FeaturedLatest/FeaturedLatest";
-import Menu from "./components/Menu/Menu";
-import Navbar from "./components/Navbar/Navbar";
-import News from "./components/News/News";
-import Search from "./components/Search/Search";
-import Sidebar from "./components/Sidebar/Sidebar";
+import FeaturedLatest from './components/FeaturedLatest/FeaturedLatest';
+import Menu from './components/Menu/Menu';
+import Navbar from './components/Navbar/Navbar';
+import News from './components/News/News';
+import Search from './components/Search/Search';
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
+  //context
+  const context = useContext(GlobalContext);
+  if (context === null) return null;
+  const { notSmallViewport } = context;
+
   // genereal state
-  const { notSmallViewport } = useContext(GlobalContext);
-  const [loading, setLoading] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // news state
-  const [category, setCategory] = useState("Home");
+  const [category, setCategory] = useState<string>('Home');
+
+  //DEFINE!!!//
   const [articles, setArticles] = useState([]);
   const [sources, setSources] = useState([]);
-  const [query, setQuery] = useState("");
-  const [input, setInput] = useState("");
+  //DEFINE!!!//
+
+  const [query, setQuery] = useState<string>('');
+  const [input, setInput] = useState<string>('');
 
   // latest news state
+  //DEFINE!!!//
   const [latestNews, setLatestNews] = useState([]);
+  //DEFINE!!!//
   const pageSize = 20;
-  const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
+  const [page, setPage] = useState<number>(1);
+  const [error, setError] = useState<Error | null>(null);
 
   // state for featured/latest button
-  const [featuredLatest, setFeaturedLatest] = useState("featured");
+  const [featuredLatest, setFeaturedLatest] = useState<string>('featured');
 
   // functions//
 
@@ -51,22 +61,22 @@ function App() {
 
   // get articles
   useEffect(() => {
-    if (category !== "Favorites") {
+    if (category !== 'Favorites') {
       setLoading(true);
       newsApiServices.getArticles(category, query).then((articles) => {
         setArticles(articles);
         setLoading(false);
       });
-    } else if (category === "Favorites") {
-      setArticles(JSON.parse(localStorage.getItem("favoriteArticles")) || []);
+    } else if (category === 'Favorites') {
+      const favoriteArticles = localStorage.getItem('favoriteArticles');
+      const parsedArticles = favoriteArticles ? JSON.parse(favoriteArticles) : [];
+      setArticles(parsedArticles);
     }
   }, [category, query]);
 
   // get latest articles
   useEffect(() => {
-    newsApiServices
-      .getLatestNews(pageSize, page)
-      .then((latestArticles) => setLatestNews(latestArticles));
+    newsApiServices.getLatestNews(pageSize, page).then((latestArticles) => setLatestNews(latestArticles));
     setPage(2);
   }, []);
 
@@ -95,18 +105,12 @@ function App() {
     if (storedArticles.length === 0) {
       localStorageServices.setFavorite(article);
     } else {
-      const articleExist = localStorageServices.isFavorite(
-        storedArticles,
-        article
-      );
+      const articleExist = localStorageServices.isFavorite(storedArticles, article);
       if (!articleExist) {
         storedArticles.push(article);
         localStorageServices.setFavorite(storedArticles);
       } else {
-        const newArticleArray = localStorageServices.removeFavorite(
-          storedArticles,
-          articleExist
-        );
+        const newArticleArray = localStorageServices.removeFavorite(storedArticles, articleExist);
         localStorageServices.setFavorite(newArticleArray);
       }
     }
@@ -120,9 +124,9 @@ function App() {
           isMenuOpen={isMenuOpen}
           handleChangeCategory={(c) => {
             setCategory(c);
-            setQuery("");
+            setQuery('');
             setIsMenuOpen(false);
-            setFeaturedLatest("featured");
+            setFeaturedLatest('featured');
           }}
           openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
           input={input}
@@ -131,7 +135,7 @@ function App() {
           }}
           queryUpdate={(q) => {
             setQuery(q);
-            setInput("");
+            setInput('');
           }}
         />
       )}
@@ -147,7 +151,7 @@ function App() {
             openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
             queryUpdate={(q) => {
               setQuery(q);
-              setInput("");
+              setInput('');
             }}
           />
         )}
@@ -155,7 +159,7 @@ function App() {
           <FeaturedLatest
             featuredLatest={featuredLatest}
             toggleFeaturedLatest={(selectedNews) => {
-              setQuery("");
+              setQuery('');
               setFeaturedLatest(selectedNews);
             }}
           />
@@ -165,7 +169,7 @@ function App() {
             <Sidebar
               category={category}
               handleChangeCategory={(c) => {
-                setQuery("");
+                setQuery('');
                 setCategory(c);
               }}
             />
