@@ -133,7 +133,7 @@ function App() {
         <Menu
           category={category}
           isMenuOpen={isMenuOpen}
-          handleChangeCategory={(c) => {
+          handleChangeCategory={(c: string) => {
             setCategory(c);
             setQuery('');
             setIsMenuOpen(false);
@@ -159,7 +159,7 @@ function App() {
             changeInput={(i: string) => {
               setInput(i);
             }}
-            openCloseMenu={(prevState) => setIsMenuOpen(!prevState)}
+            openCloseMenu={(prevState: boolean) => setIsMenuOpen(!prevState)}
             queryUpdate={(q: string) => {
               setQuery(q);
               setInput('');
