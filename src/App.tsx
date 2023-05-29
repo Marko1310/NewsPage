@@ -19,16 +19,27 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Search from './components/Search/Search';
 import Sidebar from './components/Sidebar/Sidebar';
+import Article from './components/News/Article';
 
 interface Article {
-  author: string | null;
-  content: string | null;
-  description: string;
-  publishedAt: string;
   source: { id: string | null; name: string };
+  author: string | null;
   title: string;
+  description: string;
   url: string;
   urlToImage: string;
+  publishedAt: string;
+  content: string | null;
+}
+
+interface Sources {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  category: string;
+  language: string;
+  country: string;
 }
 
 function App() {
@@ -44,9 +55,8 @@ function App() {
   // news state
   const [category, setCategory] = useState<string>('Home');
 
-  //DEFINE!!!//
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [sources, setSources] = useState([]);
+  const [articles, setArticles]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>([]);
+  const [sources, setSources]: [Sources[], React.Dispatch<React.SetStateAction<Sources[]>>] = useState<Sources[]>([]);
   //DEFINE!!!//
 
   const [query, setQuery] = useState<string>('');
@@ -54,7 +64,9 @@ function App() {
 
   // latest news state
   //DEFINE!!!//
-  const [latestNews, setLatestNews] = useState([]);
+  const [latestNews, setLatestNews]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>(
+    [],
+  );
   //DEFINE!!!//
   const pageSize = 20;
   const [page, setPage] = useState<number>(1);
@@ -101,8 +113,8 @@ function App() {
     setTimeout(() => {
       newsApiServices
         .getLatestNews(pageSize, page)
-        .then((latestArticles) => {
-          setLatestNews((prevState) => [...prevState, ...latestArticles]);
+        .then((latestArticles: Article[]) => {
+          setLatestNews((prevState: Article[]) => [...prevState, ...latestArticles]);
         })
         .catch((err) => setError(err));
     }, 1500);
