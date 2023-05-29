@@ -57,20 +57,19 @@ function App() {
 
   const [articles, setArticles]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>([]);
   const [sources, setSources]: [Sources[], React.Dispatch<React.SetStateAction<Sources[]>>] = useState<Sources[]>([]);
-  //DEFINE!!!//
 
-  const [query, setQuery] = useState<string>('');
-  const [input, setInput] = useState<string>('');
+  const [query, setQuery]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
+  const [input, setInput]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
 
   // latest news state
-  //DEFINE!!!//
   const [latestNews, setLatestNews]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>(
     [],
   );
-  //DEFINE!!!//
-  const pageSize = 20;
-  const [page, setPage] = useState<number>(1);
-  const [error, setError] = useState<Error | null>(null);
+  const pageSize: number = 20;
+  const [page, setPage]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(1);
+  const [error, setError]: [Error | null, React.Dispatch<React.SetStateAction<Error | null>>] = useState<Error | null>(
+    null,
+  );
 
   // state for featured/latest button
   const [featuredLatest, setFeaturedLatest] = useState<string>('featured');
