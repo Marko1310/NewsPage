@@ -180,7 +180,8 @@ function App() {
         {!isMenuOpen && !notSmallViewport && (
           <FeaturedLatest
             featuredLatest={featuredLatest}
-            toggleFeaturedLatest={(selectedNews) => {
+            toggleFeaturedLatest={(selectedNews: string) => {
+              console.log(selectedNews);
               setQuery('');
               setFeaturedLatest(selectedNews);
             }}
