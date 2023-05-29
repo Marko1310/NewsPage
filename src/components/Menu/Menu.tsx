@@ -1,11 +1,25 @@
+//react
+import React from 'react';
+
 // css
-import "./Menu.scss";
+import './Menu.scss';
 
 // icons
-import icons from "./icons";
-import menuX from "../../../public/assets/icons/X.svg";
+import icons from './icons';
+// @ts-ignore
+import menuX from '../../../public/assets/icons/X.svg';
 
-import Search from "../Search/Search";
+import Search from '../Search/Search';
+
+interface MenuProps {
+  category: string;
+  isMenuOpen: boolean;
+  handleChangeCategory: (variable: string) => void;
+  openCloseMenu: (variable: boolean) => void;
+  input: string;
+  changeInput: (variable: string) => void;
+  queryUpdate: (variable: string) => void;
+}
 
 const Menu = ({
   category,
@@ -15,14 +29,10 @@ const Menu = ({
   input,
   changeInput,
   queryUpdate,
-}) => {
+}: MenuProps) => {
   return (
     <div className="menu-container">
-      <img
-        onClick={() => openCloseMenu(isMenuOpen)}
-        className="menuIcons"
-        src={menuX}
-      />
+      <img onClick={() => openCloseMenu(isMenuOpen)} className="menuIcons" src={menuX} />
 
       <Search
         openCloseMenu={openCloseMenu}
@@ -37,23 +47,10 @@ const Menu = ({
             <div
               onClick={() => handleChangeCategory(el.title)}
               key={el.id}
-              className={`menu-icon-square ${
-                category === el.title ? "selected" : ""
-              }`}
+              className={`menu-icon-square ${category === el.title ? 'selected' : ''}`}
             >
-              <img
-                className={`menu-icon-image ${
-                  category === el.title ? "red" : ""
-                }`}
-                src={el.imgUrl}
-              />
-              <p
-                className={`menu-icon-title ${
-                  category === el.title ? "redColour" : ""
-                }`}
-              >
-                {el.title}
-              </p>
+              <img className={`menu-icon-image ${category === el.title ? 'red' : ''}`} src={el.imgUrl} />
+              <p className={`menu-icon-title ${category === el.title ? 'redColour' : ''}`}>{el.title}</p>
             </div>
           );
         })}
