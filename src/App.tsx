@@ -21,7 +21,7 @@ import Search from './components/Search/Search';
 import Sidebar from './components/Sidebar/Sidebar';
 import Article from './components/News/Article';
 
-interface Article {
+export interface Articles {
   source: { id: string | null; name: string };
   author: string | null;
   title: string;
@@ -55,16 +55,18 @@ function App() {
   // news state
   const [category, setCategory] = useState<string>('Home');
 
-  const [articles, setArticles]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>([]);
+  const [articles, setArticles]: [Articles[], React.Dispatch<React.SetStateAction<Articles[]>>] = useState<Articles[]>(
+    [],
+  );
   const [sources, setSources]: [Sources[], React.Dispatch<React.SetStateAction<Sources[]>>] = useState<Sources[]>([]);
 
   const [query, setQuery]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
   const [input, setInput]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
 
   // latest news state
-  const [latestNews, setLatestNews]: [Article[], React.Dispatch<React.SetStateAction<Article[]>>] = useState<Article[]>(
-    [],
-  );
+  const [latestNews, setLatestNews]: [Articles[], React.Dispatch<React.SetStateAction<Articles[]>>] = useState<
+    Articles[]
+  >([]);
   const pageSize: number = 20;
   const [page, setPage]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(1);
   const [error, setError]: [Error | null, React.Dispatch<React.SetStateAction<Error | null>>] = useState<Error | null>(
@@ -112,8 +114,8 @@ function App() {
     setTimeout(() => {
       newsApiServices
         .getLatestNews(pageSize, page)
-        .then((latestArticles: Article[]) => {
-          setLatestNews((prevState: Article[]) => [...prevState, ...latestArticles]);
+        .then((latestArticles: Articles[]) => {
+          setLatestNews((prevState: Articles[]) => [...prevState, ...latestArticles]);
         })
         .catch((err) => setError(err));
     }, 1500);
@@ -121,7 +123,7 @@ function App() {
   };
 
   // handle favorite articles
-  const handleFavorite = function (article: Article) {
+  const handleFavorite = function (article: Articles) {
     const storedArticles = localStorageServices.getFavorites();
 
     if (storedArticles.length === 0) {

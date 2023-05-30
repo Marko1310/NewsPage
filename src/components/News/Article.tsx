@@ -1,6 +1,8 @@
 // react
 import React, { useEffect, useState } from 'react';
 
+import { Articles } from '../../App'; // Assuming Article interface is defined in a separate file
+
 // css
 import './Article.scss';
 import './News.scss';
@@ -11,6 +13,16 @@ import NoImage from '../../assets/images/No_Image.png';
 
 // fetch calls
 import localStorageServices from '../../services/localStorageServices.js';
+
+interface ArticleProps {
+  category: string;
+  article: Articles;
+  // handleChangeCategory: (variable: string) => void;
+  // openCloseMenu: (variable: boolean) => void;
+  // input: string;
+  // changeInput: (variable: string) => void;
+  // queryUpdate: (variable: string) => void;
+}
 
 const Article = ({ article, category, sources, handleFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(false);
