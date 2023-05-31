@@ -1,22 +1,24 @@
+// interfaces
+import { Articles } from '../App';
+
 const getFavorites = () => {
-  return JSON.parse(localStorage.getItem("favoriteArticles")) || [];
+  const favoriteString = localStorage.getItem('favoriteArticles');
+  return favoriteString ? JSON.parse(favoriteString) : [];
 };
 
-const setFavorite = (article) => {
+const setFavorite = (article: Articles[] | Articles) => {
   if (getFavorites().length === 0) {
-    localStorage.setItem("favoriteArticles", JSON.stringify([article]));
+    localStorage.setItem('favoriteArticles', JSON.stringify([article]));
   } else {
-    localStorage.setItem("favoriteArticles", JSON.stringify(article));
+    localStorage.setItem('favoriteArticles', JSON.stringify(article));
   }
 };
 
-const isFavorite = (storedArticles, article) => {
-  return storedArticles.find(
-    (storedArticle) => storedArticle.url === article.url
-  );
+const isFavorite = (storedArticles: Articles[], article: Articles) => {
+  return storedArticles.find((storedArticle) => storedArticle.url === article.url);
 };
 
-const removeFavorite = (storedArticles, articleExist) => {
+const removeFavorite = (storedArticles: Articles[], articleExist: Articles) => {
   return storedArticles.filter((el) => el.content !== articleExist.content);
 };
 
