@@ -74,7 +74,8 @@ function App() {
   );
 
   // state for featured/latest button
-  const [featuredLatest, setFeaturedLatest] = useState<string>('featured');
+  const [featuredLatest, setFeaturedLatest]: [string, React.Dispatch<React.SetStateAction<string>>] =
+    useState<string>('featured');
 
   // functions//
 

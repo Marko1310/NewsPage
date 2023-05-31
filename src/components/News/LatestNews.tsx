@@ -1,11 +1,23 @@
+//react
+import React from 'react';
+
+// interfaces
+import { Articles } from '../../App';
+
 // components
-import EachLatestNews from "./EachLatestNews.jsx";
-import InfiniteScroll from "react-infinite-scroll-component";
+import EachLatestNews from './EachLatestNews.jsx';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 //css
-import "./LatestNews.scss";
+import './LatestNews.scss';
 
-const LatestNews = ({ fetchMoreData, latestNews, error }) => {
+interface LatestNewsProps {
+  fetchMoreData: () => void;
+  latestNews: Articles[];
+  error: Error | null;
+}
+
+const LatestNews = ({ fetchMoreData, latestNews, error }: LatestNewsProps) => {
   return (
     <div className="latestNews-container">
       <div className="latest-title-container">
@@ -22,12 +34,12 @@ const LatestNews = ({ fetchMoreData, latestNews, error }) => {
             loader={
               <h4
                 style={{
-                  marginLeft: "15px",
-                  fontWeight: "400",
-                  fontSize: "16 px",
-                  lineHeight: "16px",
-                  letteSpacing: "-0.0153846px",
-                  color: "#1e71bb",
+                  marginLeft: '15px',
+                  fontWeight: '400',
+                  fontSize: '16 px',
+                  lineHeight: '16px',
+                  // letteSpacing: '-0.0153846px',
+                  color: '#1e71bb',
                 }}
               >
                 Loading...
@@ -36,7 +48,7 @@ const LatestNews = ({ fetchMoreData, latestNews, error }) => {
             scrollableTarget="scrollableDiv"
           >
             {latestNews.map((el, index) => (
-              <EachLatestNews key={index} el={el} index={index} />
+              <EachLatestNews key={index} el={el} />
             ))}
           </InfiniteScroll>
         </div>

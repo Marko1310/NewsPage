@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 // interfaces
-import { Articles, Sources } from '../../App'; // Assuming Article interface is defined in a separate file
+import { Articles, Sources } from '../../App';
 
 // css
 import './Article.scss';

@@ -1,15 +1,29 @@
 // react
-import { useContext } from "react";
+import React, { useContext } from 'react';
+
+// interfaces
+import { Articles, Sources } from '../../App';
 
 // css
-import "./News.scss";
+import './News.scss';
 
 // components
-import LatestNews from "./LatestNews.jsx";
-import Article from "./Article.jsx";
+import LatestNews from './LatestNews.jsx';
+import Article from './Article.jsx';
 
 //context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
+
+interface NewsProps {
+  articles: Articles[];
+  sources: Sources[];
+  category: string;
+  fetchMoreData: () => void;
+  latestNews: Articles[];
+  error: Error | null;
+  handleFavorite: (article: Articles) => void;
+  featuredLatest: string;
+}
 
 const News = ({
   articles,
@@ -20,8 +34,13 @@ const News = ({
   error,
   handleFavorite,
   featuredLatest,
-}) => {
-  const { notSmallViewport } = useContext(GlobalContext);
+}: NewsProps) => {
+  // context
+  const context = useContext(GlobalContext);
+  if (context === null) {
+    return null;
+  }
+  const { notSmallViewport } = context;
 
   return (
     <div className="news-container">
@@ -38,7 +57,7 @@ const News = ({
                 handleFavorite={handleFavorite}
               />
             );
-          } else if (!notSmallViewport && featuredLatest === "featured") {
+          } else if (!notSmallViewport && featuredLatest === 'featured') {
             return (
               <Article
                 key={index}
@@ -48,23 +67,13 @@ const News = ({
                 handleFavorite={handleFavorite}
               />
             );
-          } else if (!notSmallViewport && featuredLatest !== "featured") {
+          } else if (!notSmallViewport && featuredLatest !== 'featured') {
             return null;
           }
         })}
-        {notSmallViewport && (
-          <LatestNews
-            fetchMoreData={fetchMoreData}
-            latestNews={latestNews}
-            error={error}
-          />
-        )}
-        {!notSmallViewport && featuredLatest === "latest" && (
-          <LatestNews
-            fetchMoreData={fetchMoreData}
-            latestNews={latestNews}
-            error={error}
-          />
+        {notSmallViewport && <LatestNews fetchMoreData={fetchMoreData} latestNews={latestNews} error={error} />}
+        {!notSmallViewport && featuredLatest === 'latest' && (
+          <LatestNews fetchMoreData={fetchMoreData} latestNews={latestNews} error={error} />
         )}
       </div>
     </div>

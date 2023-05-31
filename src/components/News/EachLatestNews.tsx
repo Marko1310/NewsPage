@@ -1,4 +1,14 @@
-const EachLatestNews = ({ el }) => {
+//react
+import React from 'react';
+
+// interfaces
+import { Articles } from '../../App';
+
+interface EachLatestNewsProps {
+  el: Articles;
+}
+
+const EachLatestNews = ({ el }: EachLatestNewsProps) => {
   const timeString = el.publishedAt.substring(11, 16);
 
   return (
