@@ -32,7 +32,7 @@ export interface Articles {
   content: string | null;
 }
 
-interface Sources {
+export interface Sources {
   id: string;
   name: string;
   description: string;

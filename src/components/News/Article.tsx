@@ -1,7 +1,8 @@
 // react
 import React, { useEffect, useState } from 'react';
 
-import { Articles } from '../../App'; // Assuming Article interface is defined in a separate file
+// interfaces
+import { Articles, Sources } from '../../App'; // Assuming Article interface is defined in a separate file
 
 // css
 import './Article.scss';
@@ -15,16 +16,13 @@ import NoImage from '../../assets/images/No_Image.png';
 import localStorageServices from '../../services/localStorageServices.js';
 
 interface ArticleProps {
-  category: string;
   article: Articles;
-  // handleChangeCategory: (variable: string) => void;
-  // openCloseMenu: (variable: boolean) => void;
-  // input: string;
-  // changeInput: (variable: string) => void;
-  // queryUpdate: (variable: string) => void;
+  category: string;
+  sources: Sources[];
+  handleFavorite: (article: Articles) => void;
 }
 
-const Article = ({ article, category, sources, handleFavorite }) => {
+const Article = ({ article, category, sources, handleFavorite }: ArticleProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -41,7 +39,7 @@ const Article = ({ article, category, sources, handleFavorite }) => {
       </div>
       <div className="article-container">
         <p className="article-category">
-          {category === 'Home' ? sources?.find((s) => s.id === article.source.id)?.category : category}
+          {category === 'Home' ? sources?.find((s: Sources) => s.id === article.source.id)?.category : category}
         </p>
         <a className="article-title" href={article.url}>
           {article.title}
