@@ -1,37 +1,41 @@
 // react
-import { useContext } from "react";
+import React, { useContext } from 'react';
 
 // context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 // css
-import "./Search.scss";
+import './Search.scss';
 
 // icons
-import menuLines from "../../../public/assets/icons/Three.svg";
+// @ts-ignore
+import menuLines from '../../../public/assets/icons/Three.svg';
 
-const Search = ({
-  openCloseMenu,
-  input,
-  changeInput,
-  isMenuOpen,
-  queryUpdate,
-}) => {
-  const { notSmallViewport } = useContext(GlobalContext);
+interface SearhProps {
+  openCloseMenu: (variable: boolean) => void;
+  input: string;
+  changeInput: (variable: string) => void;
+  isMenuOpen: boolean;
+  queryUpdate: (variable: string) => void;
+}
+
+const Search = ({ openCloseMenu, input, changeInput, isMenuOpen, queryUpdate }: SearhProps) => {
+  // context
+  const context = useContext(GlobalContext);
+  if (context === null) {
+    return null;
+  }
+  const { notSmallViewport } = context;
 
   return (
-    <div className={`titleSearch-container ${isMenuOpen ? "menu" : ""}`}>
-      <p className={`title ${isMenuOpen ? "center" : ""}`}>
+    <div className={`titleSearch-container ${isMenuOpen ? 'menu' : ''}`}>
+      <p className={`title ${isMenuOpen ? 'center' : ''}`}>
         <span>My</span>News
       </p>
       {!notSmallViewport && !isMenuOpen && (
-        <img
-          onClick={() => openCloseMenu(isMenuOpen)}
-          className="menuIcons"
-          src={menuLines}
-        />
+        <img onClick={() => openCloseMenu(isMenuOpen)} className="menuIcons" src={menuLines} />
       )}
-      <div className={`search-container ${isMenuOpen ? "menu" : ""}`}>
+      <div className={`search-container ${isMenuOpen ? 'menu' : ''}`}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
